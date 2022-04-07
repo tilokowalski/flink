@@ -2,14 +2,22 @@
 
 class Flink_Database_RelationProperty {
 
-    private $entity_class;
-    private $keyname;
-    private $list;
+    private $entity;
+    private $key;
+    private $multiple;
 
-    public function __construct(array $data) {
-        $this->set_property_from_data($data, 'entity_class');
-        $this->set_property_from_data($data, 'keyname');
-        $this->set_property_from_data($data, 'list');
+    public function __construct(array $data, bool $multiple) {
+        $this->set_property_from_data($data, 'entity');
+        $this->set_property_from_data($data, 'key');
+        $this->multiple = $multiple;
+    }
+
+    public static function single(array $data) {
+        return new self($data, false);
+    }
+
+    public static function multiple(array $data) {
+        return new self($data, true);
     }
 
     private function set_property_from_data(array $data, string $key) {
@@ -18,12 +26,12 @@ class Flink_Database_RelationProperty {
     }
 
     public function get_content_for_entity(Flink_Entity $entity) {
-        $entity_class = $this->entity_class;
-        if ($list) {
-            $function_name = 'find_by_' . $this->keyname;
+        $entity_class = $this->entity;
+        if ($this->multiple) {
+            $function_name = 'find_by_' . $this->key;
             return $entity_class::$function_name($entity->ID);
         } else {
-            $key_name = $this->keyname;
+            $key_name = $this->key;
             return $entity_class::get_by_ID($entity->$key_name);
         }
     }
