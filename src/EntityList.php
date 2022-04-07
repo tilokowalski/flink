@@ -24,6 +24,16 @@ abstract class Flink_EntityList extends ArrayIterator {
         return $this[0];
     }
 
+    public function limit(int $limit) {
+        $list_class = self::get_entity_class()::get_list_class();
+        $result = new $list_class();
+        foreach ($this as $key => $entity) {
+            if (intval($key) === $limit) return $result;
+            $result->add($entity);
+        }
+        return $result;
+    }
+
     public function contains(Flink_Entity $other_entity): bool {
         foreach ($this as $entity) {
             if ($entity->equals($other_entity)) return true;
