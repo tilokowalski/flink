@@ -2,12 +2,12 @@
 
 abstract class Flink_Entity {
 
-    public static function get_mapper_class() {
-        return get_called_class() . 'Mapper';
+    public static function get_mapper_class(): string {
+        return Flink_String::from(get_called_class())->append('Mapper');
     }
 
-    public static function get_list_class() {
-        return get_called_class() . 'List';
+    public static function get_list_class(): string {
+        return Flink_String::from(get_called_class())->append('List');
     }
 
     public static function get_by(Flink_Database_Predicate $predicate): ?self {
@@ -28,8 +28,10 @@ abstract class Flink_Entity {
             $entity = new $entity_class();
             foreach ($collation as $attribute => $value) {
                 if ($attribute === 'ID') $entity_id = intval($value);
-                $type = $connection->fetch("SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" . self::get_mapper_class()::get_table_name() . "' AND COLUMN_NAME = '" . $attribute . "';")[0]['DATA_TYPE'];
-                $entity->$attribute = (new Flink_Database_TypeConverter($type, $value))->convert();
+                // TODO type conversion takes way too long, probably due to query
+                // $type = $connection->fetch("DESCRIBE " . self::get_mapper_class()::get_table_name() . " " . $attribute)[0]['Type'];
+                // $entity->$attribute = (new Flink_Database_TypeConverter($type, $value))->convert();
+                $entity->$attribute = Flink_String::from($value)->utf8_encode();
             }
             $result->add($entity);
         }
@@ -42,26 +44,24 @@ abstract class Flink_Entity {
         return self::find_by_ID(Flink_Database_Predicate::not_null());
     }
 
-    private function get_stringified_attributes() {
+    private function get_stringified_attributes(): string {
         return implode(', ', array_keys(get_object_vars($this)));
     }
 
-    private function get_stringified_values() {
-        $result = '';
+    private function get_stringified_values(): string {
+        $result = new Flink_String();
         foreach (get_object_vars($this) as $value) {
-            $result .= '"' . Flink_Database_TypeConverter::stringify($value) . '", ';
+            $result->append('"' . Flink_Database_TypeConverter::stringify($value) . '", ');
         }
-        $result = substr($result, 0, -2);
-        return $result;
+        return $result->substr(0, -2);
     }
 
-    private function get_stringified_allocations() {
-        $result = '';
+    private function get_stringified_allocations(): string {
+        $result = new Flink_String();
         foreach (get_object_vars($this) as $attribute => $value) {
-            $result .= $attribute . ' = "' . Flink_Database_TypeConverter::stringify($value) . '", ';
+            $result->append($attribute . ' = "' . Flink_Database_TypeConverter::stringify($value) . '", ');
         }
-        $result = substr($result, 0, -2);
-        return $result;
+        return $result->substr(0, -2);
     }
     
     public function save() {
@@ -90,11 +90,13 @@ abstract class Flink_Entity {
             return self::$function($parameters);
         }
 
-        if (strpos($function, 'find_by_') !== false) $actual_function = 'find_by';
-        if (strpos($function, 'get_by_') !== false) $actual_function = 'get_by';
-        $attribute = str_replace($actual_function . '_', '', $function);
+        $function = Flink_String::from($function);
 
-        if (null !== $actual_function && strlen($attribute) > 0) {
+        if ($function->contains('find_by_')) $actual_function = 'find_by';
+        if ($function->contains('get_by_')) $actual_function = 'get_by';
+        $attribute = $function->replace($actual_function . '_', '');
+
+        if (isset($actual_function) && Flink_String::from($attribute)->length() > 0) {
             Flink_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Flink_Database_Predicate) {

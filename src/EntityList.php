@@ -3,7 +3,7 @@
 abstract class Flink_EntityList extends ArrayIterator {
 
     public static function get_entity_class(): string {
-        return str_replace('List', '', get_called_class());
+        return Flink_String::from(get_called_class())->replace('List', '');
     }
 
     public function add(Flink_Entity $entity): Flink_EntityList {
@@ -81,11 +81,13 @@ abstract class Flink_EntityList extends ArrayIterator {
             return $this->$function($parameters);
         }
 
-        if (strpos($function, 'find_by_') !== false) $actual_function = 'find_by';
-        if (strpos($function, 'get_by_') !== false) $actual_function = 'get_by';
-        $attribute = str_replace($actual_function . '_', '', $function);
+        $function = Flink_String::from($function);
 
-        if (null !== $actual_function && strlen($attribute) > 0) {
+        if ($function->contains('find_by_')) $actual_function = 'find_by';
+        if ($function->contains('get_by_')) $actual_function = 'get_by';
+        $attribute = $function->replace($actual_function . '_', '');
+
+        if (isset($actual_function) && Flink_String::from($attribute)->length() > 0) {
             Flink_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Flink_Database_Predicate) {
