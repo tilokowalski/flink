@@ -1,7 +1,5 @@
 <?php
 
-namespace Flink;
-
 class Flink_Connection extends mysqli {
 
     public function __construct(string $hostname, string $username, string $password, string $database) {

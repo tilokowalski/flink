@@ -1,7 +1,5 @@
 <?php
 
-namespace Flink;
-
 abstract class Flink_EntityList extends ArrayIterator {
 
     public static function get_entity_class(): string {

@@ -1,7 +1,5 @@
 <?php
 
-namespace Flink;
-
 abstract class Flink_Entity {
 
     public static function get_mapper_class(): string {
