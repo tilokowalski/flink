@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink;
+
 abstract class Flink_EntityMapper {
 
     private $relation_properties;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink\Exception;
+
 class Flink_Exception_InvalidQuery extends Flink_Exception {
 
     public function __construct(?string $query = null) {

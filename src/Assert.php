@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink;
+
 class Flink_Assert {
 
     public static function instanceof($object, $class, ?string $message = null) {

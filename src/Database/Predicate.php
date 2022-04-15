@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink\Database;
+
 class Flink_Database_Predicate {
 
     private $attribute;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink;
+
 class Flink_String {
 
     private $string;

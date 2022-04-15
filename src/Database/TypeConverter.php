@@ -1,5 +1,7 @@
 <?php
 
+namespace Flink\Database;
+
 class Flink_Database_TypeConverter {
 
     private $type;
