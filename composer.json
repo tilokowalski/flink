@@ -1,6 +1,6 @@
 {
     "name": "tilokowalski/flink",
-    "description": "lightweight php backend toolkit",
+    "description": "database relationship mapper",
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {
