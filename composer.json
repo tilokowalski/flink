@@ -1,0 +1,19 @@
+{
+    "name": "tilokowalski/flink",
+    "description": "lightweight php backend toolkit",
+    "type": "library",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Tilokowalski\\Flink\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tilo Kowalski",
+            "email": "privat@tilokowalski.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
