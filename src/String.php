@@ -76,6 +76,10 @@ class Flink_String {
         return utf8_encode($this->string);
     }
 
+    public function utf8_decode() {
+        return utf8_decode($this->string);
+    }
+
     public function __toString() {
         return $this->get_string();
     }
