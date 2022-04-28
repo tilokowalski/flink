@@ -26,4 +26,12 @@ class Flink_Assert {
         if (!file_exists($path)) throw new Flink_Exception_AssertionFailed($message);
     }
 
+    public static function is_true($condition, ?string $message = null) {
+        if (!$condition) throw new Flink_Exception_AssertionFailed($message); 
+    }
+
+    public static function is_false($condition, ?string $message = null) {
+        if ($condition) throw new Flink_Exception_AssertionFailed($message); 
+    }
+
 }
