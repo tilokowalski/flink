@@ -21,7 +21,7 @@ class Flink_Database_TypeConverter {
             case static::TYPE_INT: return intval($this->value);
             case static::TYPE_TEXT:
             case static::TYPE_VARCHAR:
-                return utf8_encode($this->value);
+                return utf8_decode($this->value);
             case static::TYPE_TINYINT: return (bool) $this->value;
             case static::TYPE_DATETIME: return new DateTime($this->value);
             default: throw new Flink_Exception_NotImplemented('database type conversion not implemented for type ' . $this->type);
