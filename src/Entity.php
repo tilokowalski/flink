@@ -143,8 +143,4 @@ abstract class Flink_Entity {
 
     }
 
-    public function create_form() {
-        return new Delight_ViewComponent_EntityForm($this);
-    }
-
 }
