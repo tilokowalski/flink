@@ -50,8 +50,7 @@ abstract class Flink_Entity {
 
     private function get_stringified_values(): string {
         $result = new Flink_String();
-        foreach (get_object_vars($this) as $attribute => $value) {
-            if ($attribute === 'ID') continue;
+        foreach (get_object_vars($this) as $value) {
             $result = $result->append('"' . Flink_Database_TypeConverter::stringify($value) . '", ');
             $result = Flink_String::from($result);
         }
@@ -61,7 +60,6 @@ abstract class Flink_Entity {
     private function get_stringified_allocations(): string {
         $result = new Flink_String();
         foreach (get_object_vars($this) as $attribute => $value) {
-            if ($attribute === 'ID') continue;
             $result = $result->append($attribute . ' = "' . Flink_Database_TypeConverter::stringify($value) . '", ');
             $result = Flink_String::from($result);
         }
@@ -69,7 +67,10 @@ abstract class Flink_Entity {
     }
     
     public function save() {
-        if (!$this->is_existent()) $this->create();
+        if (!$this->is_existent()) {
+            $this->create();
+            return;
+        }
         $this->update();
     }
 
