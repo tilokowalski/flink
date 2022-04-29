@@ -71,7 +71,7 @@ abstract class Flink_Entity {
 
     public function is_existent() {
         if (!isset($this->ID)) return false;
-        return null !== self::get_by('ID', $this->ID);
+        return null !== self::get_by_ID($this->ID);
     }
 
     private function create() {
