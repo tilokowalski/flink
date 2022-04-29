@@ -15,6 +15,12 @@ class Flink_Database_Predicate {
     const OPERATOR_IS_NULL = 'IS NULL';
     const OPERATOR_IS_NOT_NULL = 'IS NOT NULL';
 
+    const OPERATOR_GREATER = '>';
+    const OPERATOR_GREATER_EQUALS = '>=';
+
+    const OPERATOR_LESS = '<';
+    const OPERATOR_LESS_EQUALS = '<=';
+
     public function __construct(string $operator, ?string $compare = null) {
         $this->operator = $operator;
         if (null === $compare) {
@@ -47,6 +53,22 @@ class Flink_Database_Predicate {
         return new self(static::OPERATOR_IS_NOT_NULL);
     }
 
+    public static function greater($compare) {
+        return new self(static::OPERATOR_GREATER, $compare);
+    }
+
+    public static function greater_equals($compare) {
+        return new self(static::OPERATOR_GREATER_EQUALS, $compare);
+    }
+
+    public static function less($compare) {
+        return new self(static::OPERATOR_LESS, $compare);
+    }
+
+    public static function less_equals($compare) {
+        return new self(static::OPERATOR_LESS_EQUALS, $compare);
+    }
+
     public function set_attribute(string $attribute) {
         $this->attribute = $attribute;
     }
@@ -57,6 +79,10 @@ class Flink_Database_Predicate {
             case self::OPERATOR_NOT_EQUALS:
             case self::OPERATOR_LIKE:
             case self::OPERATOR_NOT_LIKE:
+            case self::OPERATOR_GREATER:
+            case self::OPERATOR_GREATER_EQUALS:
+            case self::OPERATOR_LESS:
+            case self::OPERATOR_LESS_EQUALS:
                 return $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
             case self::OPERATOR_IS_NULL:
             case self::OPERATOR_IS_NOT_NULL:
