@@ -71,7 +71,7 @@ abstract class Flink_EntityList extends ArrayIterator {
             $result->add($entity);
         }
         foreach ($other_list as $other_entity) {
-            if (!$result->contains($other_entity)) $result->add($entity);
+            if (!$result->contains($other_entity)) $result->add($other_entity);
         }
         return $result;
     }
