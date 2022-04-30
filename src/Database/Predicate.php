@@ -2,6 +2,8 @@
 
 class Flink_Database_Predicate {
 
+    private $case_sensitive;
+
     private $attribute;
     private $operator;
     private $compare;
@@ -21,12 +23,13 @@ class Flink_Database_Predicate {
     const OPERATOR_LESS = '<';
     const OPERATOR_LESS_EQUALS = '<=';
 
-    public function __construct(string $operator, ?string $compare = null) {
+    public function __construct(string $operator, ?string $compare = null, ?bool $case_sensitive = false) {
         $this->operator = $operator;
         if (null === $compare) {
             Flink_Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
         }
         $this->compare = $compare;
+        $this->case_sensitive = $case_sensitive;
     }
 
     public static function equals($compare) {
@@ -69,6 +72,10 @@ class Flink_Database_Predicate {
         return new self(static::OPERATOR_LESS_EQUALS, $compare);
     }
 
+    public static function case_sensitive($compare) {
+        return new self(static::OPERATOR_EQUALS, $compare, true);
+    }
+
     public function set_attribute(string $attribute) {
         $this->attribute = $attribute;
     }
@@ -83,7 +90,7 @@ class Flink_Database_Predicate {
             case self::OPERATOR_GREATER_EQUALS:
             case self::OPERATOR_LESS:
             case self::OPERATOR_LESS_EQUALS:
-                return $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
+                return (($this->case_sensitive) ? 'BINARY ' : '') . $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
             case self::OPERATOR_IS_NULL:
             case self::OPERATOR_IS_NOT_NULL:
                 return $this->attribute . " " . $this->operator;
