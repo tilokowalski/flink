@@ -28,6 +28,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $key => $entity) {
+            if (null === $entity) continue;
             if (intval($key) === $limit) return $result;
             $result->add($entity);
         }
@@ -45,6 +46,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
+            if (null === $entity) continue;
             if (!$other_list->contains($entity)) {
                 $result->add($entity);
             }
@@ -56,6 +58,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
+            if (null === $entity) continue;
             if ($other_list->contains($entity)) {
                 $result->add($entity);
             }
@@ -67,6 +70,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
+            if (null === $entity) continue;
             $result->add($entity);
         }
         foreach ($other_list as $other_entity) {
