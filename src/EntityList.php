@@ -6,7 +6,8 @@ abstract class Flink_EntityList extends ArrayIterator {
         return Flink_String::from(get_called_class())->replace('List', '');
     }
 
-    public function add(Flink_Entity $entity): Flink_EntityList {
+    public function add(?Flink_Entity $entity): Flink_EntityList {
+        if (null === $entity) return $this;
         $entity_class = self::get_entity_class();
         Flink_Assert::instanceof($entity, $entity_class, 'failed asserting that entity is of type ' . $entity_class);
         $this []= $entity;
@@ -28,7 +29,6 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $key => $entity) {
-            if (null === $entity) continue;
             if (intval($key) === $limit) return $result;
             $result->add($entity);
         }
@@ -46,7 +46,6 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
-            if (null === $entity) continue;
             if (!$other_list->contains($entity)) {
                 $result->add($entity);
             }
@@ -58,7 +57,6 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
-            if (null === $entity) continue;
             if ($other_list->contains($entity)) {
                 $result->add($entity);
             }
@@ -70,7 +68,6 @@ abstract class Flink_EntityList extends ArrayIterator {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
         foreach ($this as $entity) {
-            if (null === $entity) continue;
             $result->add($entity);
         }
         foreach ($other_list as $other_entity) {
