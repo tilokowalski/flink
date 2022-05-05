@@ -40,7 +40,7 @@ abstract class Flink_Entity {
 
     }
 
-    public function get_all() {
+    public static function get_all() {
         return self::find_by_ID(Flink_Database_Predicate::not_null());
     }
 
