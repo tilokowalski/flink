@@ -1,6 +1,6 @@
 {
     "name": "tilokowalski/flink",
-    "description": "database relationship mapper",
+    "description": "Web Toolkit",
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {

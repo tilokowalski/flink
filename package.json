@@ -1,0 +1,22 @@
+{
+  "name": "flink",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/tilokowalski/flink.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/tilokowalski/flink/issues"
+  },
+  "homepage": "https://gitlab.com/tilokowalski/flink#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
