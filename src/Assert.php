@@ -34,4 +34,9 @@ class Flink_Assert {
         if ($condition) throw new Flink_Exception_AssertionFailed($message); 
     }
 
+    public static function mime_content_type($path, $type, ?string $message = null) {
+        self::file_exists($path);
+        if (!Flink_String::from(mime_content_type($path))->contains($type)) throw new Flink_Exception_AssertionFailed($message); 
+    }
+
 }

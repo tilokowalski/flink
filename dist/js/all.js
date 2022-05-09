@@ -1,0 +1,1 @@
+$(".flink-vc.video").each(function(){const n=$(this),o=n.find("video"),e=n.find("button.play-pause");function s(){o[0].paused?o[0].play():o[0].pause()}$(document).keydown(function(n){" "!==n.key.toLowerCase()||e.is(":focus")||s()}),e.click(()=>s()),o.click(()=>s()),o.on("play",function(){n.removeClass("paused")}),o.on("pause",function(){n.addClass("paused")})});

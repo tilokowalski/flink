@@ -1,0 +1,15 @@
+<div class='flink-vc video paused'>
+    <? if ($this->timeline): ?>
+        <div class='timeline'>
+        </div>
+    <? endif ?>
+    <? if ($this->controls): ?>
+        <div class='controls'>
+            <button class='button play-pause'>
+                <i class='fa fa-play play'></i>
+                <i class='fa fa-pause pause'></i>
+            </button>
+        </div>
+    <? endif ?>
+    <video src='<?= $this->src ?>'<?= $this->autoplay ? ' autoplay' : '' ?>></video>
+</div>
