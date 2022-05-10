@@ -1,2 +1,4 @@
-<? $this->label->render() ?>
-<input type='<?= $this->type ?>' name='<?= $this->name ?>'<? if ($this->required) echo " required" ?>>
+<div class='flink-vc formelement<?= $this->inline ? " inline" : "" ?>'>
+    <? if (null !== $this->label) $this->label->render() ?>
+    <input type='<?= $this->type ?>' name='<?= $this->name ?>' id='<?= $this->name ?>'<? if ($this->required) echo " required" ?>>
+</div>

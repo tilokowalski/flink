@@ -6,7 +6,7 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
 
     public function __construct(string $type, string $name, ?string $label = '', ?bool $required = false) {
         $this->type = $type;
-        parent::__construct($label, $name, $required);
+        parent::__construct($name, $required, $label);
     }
 
 }
