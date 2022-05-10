@@ -14,7 +14,7 @@ abstract class Flink_ViewComponent {
     }
 
     public function render() {
-        include_once($this->get_component_file());
+        include $this->get_component_file();
     }
 
 }
