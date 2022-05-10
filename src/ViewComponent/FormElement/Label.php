@@ -10,4 +10,8 @@ class Flink_ViewComponent_FormElement_Label extends Flink_ViewComponent_FormElem
         $this->for = $for;
     }
 
+    public function __toString() {
+        return (string) $this->title;
+    }
+
 }
