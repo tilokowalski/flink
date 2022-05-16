@@ -15,7 +15,6 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
         $this->set_title($title);
         $this->set_required($required);
     }
-
     
     public function get_form() {
         return $this->form;
@@ -36,7 +35,6 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
     public function get_inline() {
         return $this->inline;
     }
-
 
     public function set_form(Flink_ViewComponent_Form $form): self {
         $this->form = $form;
@@ -62,7 +60,6 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
         $this->inline = $inline;
         return $this;
     }
-
 
     public function get_value() {
         switch ($this->form->get_method()) {

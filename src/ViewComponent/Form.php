@@ -67,6 +67,7 @@ class Flink_ViewComponent_Form extends Flink_ViewComponent {
 
     public function is_submitted(): bool {
         foreach ($this->form_elements as $form_element) {
+            if ($form_element->get_type() === 'checkbox') continue;
             if ($this->method === 'POST' && !isset($_POST[$form_element->get_name()])) return false;
             if ($this->method === 'GET' && !isset($_GET[$form_element->get_name()])) return false;
         }
