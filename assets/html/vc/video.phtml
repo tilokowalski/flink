@@ -1,6 +1,6 @@
 <div class='flink-vc video paused' data-volume-level='high'>
     <div class="gui">
-        <? if ($this->timeline): ?>
+        <? if ($this->is_timelineable()): ?>
             <div class='timeline-wrapper'>
                 <div class='timeline'>
                     <div class='indicator'>
@@ -8,7 +8,7 @@
                 </div>
             </div>
         <? endif ?>
-        <? if ($this->controls): ?>
+        <? if ($this->is_controlable()): ?>
             <div class='controls'>
                 <button class='button play-pause'>
                     <i class='fa fa-play play'></i>
@@ -33,5 +33,5 @@
             </div>
         <? endif ?>
     </div>
-    <video src='<?= $this->src ?>'<?= $this->autoplay ? ' autoplay' : '' ?>></video>
+    <video src='<?= $this->get_src() ?>'<?= $this->get_autoplay() ? ' autoplay' : '' ?>></video>
 </div>

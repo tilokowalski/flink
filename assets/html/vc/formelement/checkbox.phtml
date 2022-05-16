@@ -1,4 +1,2 @@
-<div class='flink-vc formelement<?= ($this->inline) ? " inline" : "" ?>'>
-    <input type='<?= $this->type ?>' name='<?= $this->name ?>' id='<?= $this->name ?>'<? if ($this->required) echo " required" ?><? if ($this->checked) echo " checked" ?>>
-    <? if (null !== $this->label) $this->label->render() ?>
-</div>
+<input type='checkbox' name='<?= $this->get_name() ?>' id='<?= $this->get_name() ?>'<? if ($this->is_required()) echo ' required' ?><? if ($this->get_checked()) echo ' checked' ?>>
+<label for='<?= $this->get_name() ?>'><?= $this->get_title() ?></label>

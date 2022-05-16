@@ -1,3 +1,8 @@
-<form class='flink-vc form' method='<?= $this->method ?>'<? if (null !== $this->action) echo " action='" . $this->action . "'" ?>>
-    <? foreach ($this->form_elements as $form_element) $form_element->render(); ?>
-</form>
+<div class='flink-vc form'>
+    <form method='<?= $this->get_method() ?>'<? if (null !== $this->get_action()) echo " action='" . $this->get_action() . "'" ?>>
+        <? foreach ($this->get_form_elements() as $form_element) $form_element->render(); ?>
+        <br />
+        <? if ($this->is_submitable()): ?><button type='submit' class='button submit'><?= $this->get_submit_title() ?></button><? endif ?>
+        <? if ($this->is_cancelable()): ?><button type='button' class='button cancel'><?= $this->get_cancel_title() ?></button><? endif ?>
+    </form>
+</div>

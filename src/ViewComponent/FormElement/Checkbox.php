@@ -2,15 +2,23 @@
 
 class Flink_ViewComponent_FormElement_Checkbox extends Flink_ViewComponent_FormElement_Input {
 
-    public $type;
+    private $checked;
 
-    public $checked;
+    public function __construct(string $name, ?string $title = null, ?bool $required = false, ?bool $checked = false) {
+        $this->set_checked($checked);
+        parent::__construct($name, $title, $required);
+    }
 
-    public function __construct(string $name, ?string $label = '', ?bool $required = false, ?bool $checked = false) {
-        $this->set_type('checkbox');
-        $this->set_inline();
+    public function set_checked(?bool $checked = true) {
         $this->checked = $checked;
-        parent::__construct($name, $required, $label);
+    }
+
+    public function get_checked() {
+        return $this->checked;
+    }
+
+    public function is_checked() {
+        return $this->get_value() === 'on';
     }
 
 }
