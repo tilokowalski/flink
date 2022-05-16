@@ -1,13 +1,37 @@
 <?php
 
-abstract class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElement {
+class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElement {
 
-    public function get_value() {
-        switch ($this->form->get_method()) {
-            case 'POST': return $_POST[$this->name]; break;
-            case 'GET': return $_GET[$this->name]; break;
-            default: throw new Flink_Exception_NotImplemented('method ' . $this->form->get_method() . ' not implemented for input value');
-        }
+    private $type;
+
+    public static function text(string $name, ?string $title = null, ?bool $required = false): self {
+        $result = new self($name, $title, $required);
+        return $result->set_type('text');
+    }
+
+    public static function email(string $name, ?string $title = null, ?bool $required = false): self {
+        $result = new self($name, $title, $required);
+        return $result->set_type('email');
+    }
+
+    public static function password(string $name, ?string $title = null, ?bool $required = false): self {
+        $result = new self($name, $title, $required);
+        return $result->set_type('password');
+    }
+
+    public static function checkbox(string $name, ?string $title = null, ?bool $required = false): self {
+        $result = new self($name, $title, $required);
+        return $result->set_type('checkbox');
+    }
+
+    public function set_type(string $type): self {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function get_type() {
+        if (null === $this->type) $this->set_type('text');
+        return $this->type;
     }
 
 }
