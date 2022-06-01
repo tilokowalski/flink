@@ -15,6 +15,11 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
         return $result->set_type('email');
     }
 
+    public static function phone(string $name, ?string $title = null, ?bool $required = false): self {
+        $result = new self($name, $title, $required);
+        return $result->set_type('phone');
+    }
+
     public static function password(string $name, ?string $title = null, ?bool $required = false): self {
         $result = new self($name, $title, $required);
         return $result->set_type('password');
