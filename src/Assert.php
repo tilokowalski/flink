@@ -14,6 +14,14 @@ class Flink_Assert {
         if ($x === $y) throw new Flink_Exception_AssertionFailed($message);
     }
 
+    public static function is_null($x, ?string $message = null) {
+        if (null !== $x) throw new Flink_Exception_AssertionFailed($message);
+    }
+
+    public static function not_null($x, ?string $message = null) {
+        if (null === $x) throw new Flink_Exception_AssertionFailed($message);
+    }
+
     public static function in_array($value, $array, ?string $message = null) {
         if (!in_array($value, $array)) throw new Flink_Exception_AssertionFailed($message);
     }
