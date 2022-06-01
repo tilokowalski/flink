@@ -1,9 +1,9 @@
 <? if ($this->get_type() === 'checkbox'): ?>
     <input type='<?= $this->get_type() ?>' name='<?= $this->get_name() ?>' id='<?= $this->get_name() ?>'<? if ($this->is_required()) echo ' required' ?><? if ($this->get_checked()) echo ' checked' ?>>
     <? if (!$this->get_inline()): ?><br /><? endif ?>
-    <label for='<?= $this->get_name() ?>'><?= $this->get_title() ?></label>
+    <label for='<?= $this->get_name() ?>'><?= $this->get_title() ?><? if ($this->is_required()) echo ' *' ?></label>
 <? else: ?>
-    <label for='<?= $this->get_name() ?>'><?= $this->get_title() ?></label>
+    <label for='<?= $this->get_name() ?>'><?= $this->get_title() ?><? if ($this->is_required()) echo ' *' ?></label>
     <? if (!$this->get_inline()): ?><br /><? endif ?>
     <input type='<?= $this->get_type() ?>' name='<?= $this->get_name() ?>' id='<?= $this->get_name() ?>'<? if ($this->is_required()) echo ' required' ?><? if ($this->get_checked()) echo ' checked' ?>>
 <? endif ?>
