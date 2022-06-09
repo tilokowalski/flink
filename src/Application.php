@@ -23,4 +23,11 @@ class Flink_Application {
         echo "<script>window.location = '" . $target . "';</script>";
     }
 
+    public static function prepare_url($url) {
+        $slashes = '';
+        while(!file_exists($slashes . '.htaccess')) $slashes .= '../';
+        $result = $slashes . $url;
+        return $result;
+    }
+
 }

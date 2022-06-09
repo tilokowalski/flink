@@ -13,6 +13,7 @@ abstract class Flink_ViewComponent {
 
     public function get_component_file() {
         $content_file = 'vendor/tilokowalski/flink/assets/html/vc' . $this->get_component_name() . '.phtml';
+        $content_file = Flink_Application::prepare_url($content_file);
         Flink_Assert::file_exists($content_file, 'missing vc content file: ' . $content_file);
         return $content_file;
     }
