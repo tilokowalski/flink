@@ -3,6 +3,15 @@ $('.flink-vc.form').each(function() {
 
     const form = $(this).find('form');
 
+    form.find(':input').on('input', function() {
+        var name = $(this).attr('name');
+        var input_error = $('span.input-error#' + name);
+        if (input_error.length) {
+            input_error.remove();
+            $(this).removeClass('error');
+        }
+    });
+
     form.submit(function(e) {
 
         e.preventDefault();
@@ -34,9 +43,10 @@ $('.flink-vc.form').each(function() {
     
             if (!validateEmail(email)) {
                 may_be_submitted = false;
-                if (!$('span.input-error#email').length) {
-                    $("<span class='input-error' id='email'>Geben Sie eine gültige E-Mail Adresse an</span>").insertAfter('input[name=email]');
-                    $('input[name=email]').addClass('error');
+                var name = $(this).attr('name');
+                if (!$('span.input-error#' + name).length) {
+                    $("<span class='input-error' id='" + name + "'>Geben Sie eine gültige E-Mail Adresse an</span>").insertAfter('input[name=email]');
+                    $(this).addClass('error');
                 }
             }
 
@@ -60,9 +70,10 @@ $('.flink-vc.form').each(function() {
         
                 if (!validatePhone(phone)) {
                     may_be_submitted = false;
-                    if (!$('span.input-error#phone').length) {
-                        $("<span class='input-error' id='phone'>Geben Sie eine gültige Nummer im folgenden Format an: +49 152 12345678</span>").insertAfter('input[name=phone]');
-                        $('input[name=phone]').addClass('error');
+                    var name = $(this).attr('name');
+                    if (!$('span.input-error#' + name).length) {
+                        $("<span class='input-error' id='" + name + "'>Geben Sie eine gültige Nummer im folgenden Format an: +49 152 12345678</span>").insertAfter('input[name=phone]');
+                        $(this).addClass('error');
                     }
                 }
         
