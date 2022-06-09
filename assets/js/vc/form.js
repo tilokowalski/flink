@@ -1,7 +1,7 @@
 
 $('.flink-vc.form').each(function() {
 
-    const form = $(this).find('form');
+    const form = $(this);
 
     form.find(':input').on('input', function() {
         console.log("test");
