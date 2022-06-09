@@ -12,7 +12,7 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
     public function __construct(string $name, ?string $title = null, ?bool $required = false) {
         $this->set_title($title);
         $this->set_required($required);
-        parent::construct($name);
+        parent::__construct($name);
     }
     
     public function get_form() {
