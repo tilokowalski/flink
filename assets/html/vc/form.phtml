@@ -1,4 +1,4 @@
-<div class='flink-vc form'>
+<div class='flink-vc form' id='<?= $this->get_name() ?>'>
     <form method='<?= $this->get_method() ?>'<? if (null !== $this->get_action()) echo " action='" . $this->get_action() . "'" ?>>
         <? foreach ($this->get_form_elements() as $form_element): ?>
             <div><? $form_element->render(); ?></div>

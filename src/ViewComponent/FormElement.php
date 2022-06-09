@@ -4,24 +4,19 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
 
     private $form;
 
-    private $name;
     private $title;
     private $required;
 
     private $inline = true;
 
     public function __construct(string $name, ?string $title = null, ?bool $required = false) {
-        $this->set_name($name);
         $this->set_title($title);
         $this->set_required($required);
+        parent::construct($name);
     }
     
     public function get_form() {
         return $this->form;
-    }
-
-    public function get_name() {
-        return $this->name;
     }
 
     public function get_title() {
@@ -38,11 +33,6 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
 
     public function set_form(Flink_ViewComponent_Form $form): self {
         $this->form = $form;
-        return $this;
-    }
-
-    public function set_name(string $name): self {
-        $this->name = $name;
         return $this;
     }
 

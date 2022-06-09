@@ -2,6 +2,16 @@
 
 abstract class Flink_ViewComponent {
 
+    private $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+
+    public function get_name() {
+        return $this->name;
+    }
+
     private function get_component_name() {
         $result = '';
         foreach (Flink_String::from(get_called_class())->explode('_') as $key => $segment) {

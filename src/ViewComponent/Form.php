@@ -15,11 +15,11 @@ class Flink_ViewComponent_Form extends Flink_ViewComponent {
     private $submit_title = 'Senden';
     private $cancel_title = 'Abbrechen';
 
-    public function __construct(?string $method = 'post', ?string $action = null) {
+    public function __construct(string $name, ?string $method = 'post', ?string $action = null) {
         $this->set_method($method);
         $this->action = $action;
+        parent::__construct($name);
     }
-
 
     public function get_form_elements() {
         return $this->form_elements;
