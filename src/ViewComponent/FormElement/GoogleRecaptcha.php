@@ -25,7 +25,7 @@ class Flink_ViewComponent_FormElement_GoogleRecaptcha extends Flink_ViewComponen
 
     public function was_successful() {
         Flink_Assert::is_true($this->get_form()->is_submitted(), 'captcha success validation called before form submission');
-        if (Flink_Connection::is_localhost()) return true;
+        if (Flink_Application::is_localhost()) return true;
         if ($this->is_empty()) return false;
                 
         $data = array(
