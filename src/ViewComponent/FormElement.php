@@ -61,12 +61,25 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
         return $this;
     }
 
+    public function is_set() {
+        switch ($this->form->get_method()) {
+            case 'POST': return isset($_POST[$this->name]); break;
+            case 'GET': return isset($_GET[$this->name]); break;
+            default: throw new Flink_Exception_NotImplemented('no implementation for form method ' . $this->form->get_method());
+        }
+    }
+
     public function get_value() {
+        if (!$this->is_set()) return null;
         switch ($this->form->get_method()) {
             case 'POST': return $_POST[$this->name]; break;
             case 'GET': return $_GET[$this->name]; break;
             default: throw new Flink_Exception_NotImplemented('no implementation for form method ' . $this->form->get_method());
         }
+    }
+
+    public function is_empty() {
+        return Flink_String::from($this->get_value())->length() > 0;
     }
 
 }
