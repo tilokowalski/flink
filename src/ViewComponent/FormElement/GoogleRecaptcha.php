@@ -56,7 +56,6 @@ class Flink_ViewComponent_FormElement_GoogleRecaptcha extends Flink_ViewComponen
     public function was_successful() {
         // if (Flink_Application::is_localhost()) return true;
         return $this->get_response()->success;
-        
     }
 
     public function render() {
