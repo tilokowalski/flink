@@ -15,13 +15,13 @@ abstract class Flink_EntityList extends ArrayIterator {
     }
 
     public function get_single(): ?Flink_Entity {
-        if (count($this) === 0) return null;
-        Flink_Assert::equals(count($this), 1, 'failed asserting that list holds only one entity');
+        if ($this->count() === 0) return null;
+        Flink_Assert::equals($this->count(), 1, 'failed asserting that list holds only one entity');
         return $this->get_first();
     }
 
     public function get_first(): ?Flink_Entity {
-        if (count($this) === 0) return null;
+        if ($this->count() === 0) return null;
         return $this[0];
     }
 
@@ -40,6 +40,20 @@ abstract class Flink_EntityList extends ArrayIterator {
             if ($entity->equals($other_entity)) return true;
         }
         return false;
+    }
+
+    public function count() {
+        return count($this);
+    }
+
+    public function is_empty() {
+        return $this->count() === 0;
+    }
+
+    public function delete() {
+        foreach ($this as $entity) {
+            $entity->delete();
+        }
     }
 
     public function without(Flink_EntityList $other_list): Flink_EntityList {
@@ -77,7 +91,7 @@ abstract class Flink_EntityList extends ArrayIterator {
     }
 
     public function sum(string $attribute) {
-        if (count($this) === 0) return 0;
+        if ($this->count() === 0) return 0;
         Flink_Assert::is_true(is_numeric($this->get_first()->$attribute), $attribute . ' can not be summed up');
         $result = 0;
         foreach ($this as $entity) {
