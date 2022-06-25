@@ -50,6 +50,10 @@ abstract class Flink_EntityList extends ArrayIterator {
         return $this->count() === 0;
     }
 
+    public function delete() {
+        foreach ($this as $entity) $entity->delete();
+    }
+
     public function without(Flink_EntityList $other_list): Flink_EntityList {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
