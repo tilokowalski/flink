@@ -37,10 +37,10 @@ class Flink_Application {
     }
 
     private static function include_jquery_if_needed() {
-        if ($this->jquery_included) return;
+        if (self::$jquery_included) return;
         echo "<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>";
         echo "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js'></script>";
-        $this->jquery_included = true;
+        self::$jquery_included = true;
     }
 
     public static function prepare_url($url) {
