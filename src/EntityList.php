@@ -51,7 +51,9 @@ abstract class Flink_EntityList extends ArrayIterator {
     }
 
     public function delete() {
-        foreach ($this as $entity) $entity->delete();
+        foreach ($this as $entity) {
+            $entity->delete();
+        }
     }
 
     public function without(Flink_EntityList $other_list): Flink_EntityList {
