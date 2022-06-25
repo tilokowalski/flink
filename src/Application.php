@@ -29,7 +29,6 @@ class Flink_Application {
 
     public static function remove_cookie($name, ?string $path = '/') {
         if (!isset($_COOKIE[$name])) return;
-        exit("remove cookie");
         echo "<script>$.removeCookie('" . $name . "', { path: '" . $path . "' })</script>";
     }
 
