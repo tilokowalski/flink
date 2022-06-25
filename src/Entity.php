@@ -89,11 +89,6 @@ abstract class Flink_Entity {
         $connection->execute("UPDATE " . self::get_mapper_class()::get_table_name() . " SET " . $this->get_stringified_allocations() . " WHERE ID = '" . $this->ID . "';");
     }
 
-    public function delete() {
-        global $connection;
-        $connection->execute("DELETE FROM " . self::get_mapper_class()::get_table_name() . " WHERE ID = '" . $this->ID . "';");
-    }
-
     public static function __callStatic($function, $parameters) {
 
         if (method_exists(self::class, $function)) {
