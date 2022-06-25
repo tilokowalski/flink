@@ -28,7 +28,9 @@ class Flink_Application {
     }
 
     public static function remove_cookie($name, ?string $path = '/') {
-        echo "<script>$.removeCookie('" . $name . "', { path: '". $path . "' })</script>";
+        if (!isset($_COOKIE[$name])) return;
+        exit("remove cookie");
+        echo "<script>$.removeCookie('" . $name . "', { path: '" . $path . "' })</script>";
     }
 
     public static function prepare_url($url) {
