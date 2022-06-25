@@ -4,7 +4,6 @@ $('.flink-vc.form').each(function() {
     const form = $(this);
 
     form.find(':input').on('input', function() {
-        console.log("test");
         var name = $(this).attr('name');
         var input_error = $('span.input-error#' + name);
         if (input_error.length) {
