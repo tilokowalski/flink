@@ -4,7 +4,7 @@ class Flink_Application {
 
     private $connection;
 
-    private $jquery_included = false;
+    public static $jquery_included = false;
 
     public function connect_db(string $hostname, string $username, string $password, string $database) {
         $connection = new Flink_Connection($hostname, $username, $password, $database);
