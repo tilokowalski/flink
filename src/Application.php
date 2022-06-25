@@ -23,6 +23,14 @@ class Flink_Application {
         echo "<script>window.location = '" . $target . "';</script>";
     }
 
+    public static function set_cookie($name, $value, $expiration, ?string $path = '/') {
+        echo "<script>$.cookie('" . $name . "', '" . $value . "', { expires: " . $expiration . ", path: '" . $path . "' })</script>";
+    }
+
+    public static function remove_cookie($name, ?string $path = '/') {
+        echo "<script>$.removeCookie('" . $name . "', { path: '". $path . "' })</script>";
+    }
+
     public static function prepare_url($url) {
         $slashes = '';
         while(!file_exists($slashes . '.htaccess')) $slashes .= '../';
