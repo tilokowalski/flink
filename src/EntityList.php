@@ -77,7 +77,7 @@ abstract class Flink_EntityList extends ArrayIterator {
     }
 
     public function sum(string $attribute) {
-        if (count($this) === 0) return null;
+        if (count($this) === 0) return 0;
         Flink_Assert::is_true(is_numeric($this->get_first()->$attribute), $attribute . ' can not be summed up');
         $result = 0;
         foreach ($this as $entity) {
