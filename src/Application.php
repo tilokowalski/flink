@@ -21,6 +21,7 @@ class Flink_Application {
     
     public static function redirect(string $target) {
         echo "<script>window.location = '" . $target . "';</script>";
+        return;
     }
 
     public static function set_cookie($name, $value, $expiration, ?string $path = '/') {
