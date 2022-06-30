@@ -144,6 +144,7 @@ $('.flink-vc.video').each(function() {
     // Fullscreen
 
     function toggleFullscreen() {
+        if (video[0].attr('data-fullscreenable') === 'false') return;
         document.fullscreenElement == null ? videoContainer[0].requestFullscreen() : document.exitFullscreen();
     }
 
