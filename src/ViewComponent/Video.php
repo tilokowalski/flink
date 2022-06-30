@@ -22,6 +22,10 @@ class Flink_ViewComponent_Video extends Flink_ViewComponent {
         $this->set_muted($muted);
     }
 
+    public static function background(string $src) {
+        return new self($src, false, false, false, true, true);
+    }
+
 
     public function get_src() {
         return $this->src;
