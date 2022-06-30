@@ -1,4 +1,4 @@
-<div class='flink-vc video paused' data-volume-level='high' id='<?= $this->get_name() ?>'>
+<div class='flink-vc video paused' data-volume-level='high' data-pausable='<?= $this->is_pausable() ? 'true' : 'false' ?>' id='<?= $this->get_name() ?>'>
     <? if ($this->is_timelineable() || $this->is_controlable()): ?>
         <div class="gui">
             <? if ($this->is_timelineable()): ?>
@@ -35,5 +35,5 @@
             <? endif ?>
         </div>
     <? endif ?>
-    <video src='<?= $this->get_src() ?>'<?= $this->get_autoplay() ? ' autoplay' : '' ?>></video>
+    <video src='<?= $this->get_src() ?>'<?= $this->is_autoplay() ? ' autoplay' : '' ?><?= $this->is_muted() ? ' muted' : '' ?>></video>
 </div>

@@ -62,6 +62,7 @@ $('.flink-vc.video').each(function() {
     // Play / Pause
 
     function togglePlayPause() {
+        if (video[0].attr('data-pausable') === 'false') return;
         video[0].paused ? video[0].play() : video[0].pause();
     }
 

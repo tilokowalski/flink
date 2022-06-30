@@ -6,15 +6,20 @@ class Flink_ViewComponent_Video extends Flink_ViewComponent {
 
     private $timelineable;
     private $controlable;
-    private $autoplayable;
+    private $pausable;
 
-    public function __construct(string $src, ?bool $timelineable = true, ?bool $controlable = true) {
+    private $autoplay;
+    private $muted;
+
+    public function __construct(string $src, ?bool $timelineable = true, ?bool $controlable = true, ?bool $pausable = true, ?bool $autoplay = false, ?bool $muted = false) {
         Flink_Assert::mime_content_type($src, 'video/', 'source file ' . $src . ' is not a playable video');
         $this->src = $src;
 
         $this->set_timelineable($timelineable);
         $this->set_controlable($controlable);
-        $this->set_autoplayable(false);
+        $this->set_pausable($pausable);
+        $this->set_autoplay($autoplay);
+        $this->set_muted($muted);
     }
 
 
@@ -30,8 +35,16 @@ class Flink_ViewComponent_Video extends Flink_ViewComponent {
         return $this->controlable;
     }
 
-    public function is_autoplayable() {
-        return $this->autoplayable;
+    public function is_pausable() {
+        return $this->pausable;
+    }
+
+    public function is_autoplay() {
+        return $this->autoplay;
+    }
+
+    public function is_muted() {
+        return $this->muted;
     }
 
     
@@ -45,8 +58,18 @@ class Flink_ViewComponent_Video extends Flink_ViewComponent {
         return $this;
     }
     
-    public function set_autoplayable(?bool $autoplayable = true): self {
-        $this->autoplayable = $autoplayable;
+    public function set_pausable(?bool $pausable = true): self {
+        $this->pausable = $pausable;
+        return $this;
+    }
+    
+    public function set_autoplay(?bool $autoplay = true): self {
+        $this->autoplay = $autoplay;
+        return $this;
+    }
+    
+    public function set_muted(?bool $muted = true): self {
+        $this->muted = $muted;
         return $this;
     }
 
