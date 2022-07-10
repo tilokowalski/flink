@@ -1,36 +1,83 @@
-
-div.flink-vc.toast
+div.flink-vc.toast-container
+    position: fixed
     width: 300px
-    position: relative
-    padding: 20px
-    color: $flink-color-white
-    
-    &[data-type="success"]
-        background-color: $flink-color-success
-    
-    &[data-type="warning"]
-        background-color: $flink-color-warning
-    
-    &[data-type="error"]
-        background-color: $flink-color-error
-    
-    &[data-type="info"]
-        background-color: $flink-color-info
 
-    > div.bar
-        z-index: 10000
-        width: 100%
-        height: 5px
-        background-color: rgba(255, 255, 255, .5)
-        position: absolute
+    &[data-position^="top"]
+        top: 0
+
+        div.flink-vc.toast
+            margin-top: 20px
+
+    &[data-position^="bottom"]
         bottom: 0
+
+        div.flink-vc.toast
+            margin-bottom: 20px
+
+    &[data-position$="left"]
         left: 0
+        padding-left: 20px
+
+        div.flink-vc.toast
+            transform: translateX(-110%)
+
+    &[data-position$="right"]
+        right: 0
+        padding-right: 20px
+
+        div.flink-vc.toast
+            transform: translateX(110%)
+
+    &[data-position$="center"]
+        left: 50%
+        transform: translateX(-50%)
+
+    &[data-position="top-center"]
+
+        div.flink-vc.toast
+            transform: translateY(-100vh)
+
+    &[data-position="bottom-center"]
+
+        div.flink-vc.toast
+            transform: translateY(100vh)
+
+    div.flink-vc.toast
+        width: 100%
+        position: relative
+        padding: 20px
+        color: $flink-color-white
+        cursor: pointer
+        transition: transform 400ms ease-in-out
+
+        &.visible
+            transform: translate(0, 0)
         
-    > h1.title
-        font-size: 13px
-        margin-bottom: 5px
+        &[data-type="success"]
+            background-color: $flink-color-success
+        
+        &[data-type="warning"]
+            background-color: $flink-color-warning
+        
+        &[data-type="error"]
+            background-color: $flink-color-error
+        
+        &[data-type="info"]
+            background-color: $flink-color-info
 
-    > p.message
-        font-size: 12px
+        > div.bar
+            width: calc(100% * var(--progress))
+            height: 5px
+            background-color: rgba(255, 255, 255, .5)
+            position: absolute
+            bottom: 0
+            left: 0
+            
+        > h1.title
+            font-size: 13px
+            margin-bottom: 5px
 
-    
+        > p.message
+            font-size: 12px
+
+        

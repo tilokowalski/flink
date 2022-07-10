@@ -1,5 +1,11 @@
-<div class='flink-vc toast' data-type='<?= $this->get_type() ?>'>
-    <div class='bar'></div>
-    <h1 class='title'><?= $this->get_title() ?></h1>
-    <p class='message'><?= $this->get_message() ?></p>
-</div>
+<script type='module'>
+
+    const toast = new Toast({
+        type: '<?= $this->get_type() ?>',
+        title: '<?= $this->get_title() ?>',
+        message: '<?= $this->get_message() ?>',
+        position: '<?= $this->get_position() ?>',
+        autoClose: '<?= $this->get_autoclose() ?>'
+    });
+
+</script>
