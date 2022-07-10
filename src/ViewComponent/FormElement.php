@@ -68,8 +68,4 @@ abstract class Flink_ViewComponent_FormElement extends Flink_ViewComponent {
         }
     }
 
-    public function is_empty() {
-        return Flink_String::from($this->get_value())->length() > 0;
-    }
-
 }
