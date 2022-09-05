@@ -14,6 +14,22 @@ class Flink_Assert {
         if ($x === $y) throw new Flink_Exception_AssertionFailed($message);
     }
 
+    public static function greater($x, $y, ?string $message = null) {
+        if ($x < $y) throw new Flink_Exception_AssertionFailed($message);
+    }
+
+    public static function less($x, $y, ?string $message = null) {
+        if ($x > $y) throw new Flink_Exception_AssertionFailed($message);
+    }
+
+    public static function greater_equals($x, $y, ?string $message = null) {
+        if ($x <= $y) throw new Flink_Exception_AssertionFailed($message);
+    }
+
+    public static function less_equals($x, $y, ?string $message = null) {
+        if ($x >= $y) throw new Flink_Exception_AssertionFailed($message);
+    }
+
     public static function is_null($x, ?string $message = null) {
         if (null !== $x) throw new Flink_Exception_AssertionFailed($message);
     }
