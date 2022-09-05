@@ -117,7 +117,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $attribute = $function->replace($actual_function . '_', '');
 
         if (isset($actual_function) && Flink_String::from($attribute)->length() > 0) {
-            Flink_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
+            Flink_Assert::greater_equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             $order = isset($parameters[1]) ? $parameters[1] : null;
             if (!$predicate instanceof Flink_Database_Predicate) {
