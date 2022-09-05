@@ -119,12 +119,14 @@ abstract class Flink_EntityList extends ArrayIterator {
         if (isset($actual_function) && Flink_String::from($attribute)->length() > 0) {
             Flink_Assert::greater_equals(count($parameters), 1, $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
-            $order = isset($parameters[1]) ? $parameters[1] : null;
             if (!$predicate instanceof Flink_Database_Predicate) {
                 $predicate = Flink_Database_Predicate::equals($predicate);
             }
             $predicate->set_attribute($attribute);
-            $result = $this->intersect(static::get_entity_class()::find_by($predicate, $order));
+            if (count($parameters > 1)) {
+                $predicate->set_order($parameters[1]);
+            }
+            $result = $this->intersect(static::get_entity_class()::find_by($predicate));
             if ($actual_function === 'get_by') return $result->get_single();
             return $result;
         }

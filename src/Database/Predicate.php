@@ -7,6 +7,7 @@ class Flink_Database_Predicate {
     private $attribute;
     private $operator;
     private $compare;
+    private $order;
 
     const OPERATOR_EQUALS = '=';
     const OPERATOR_NOT_EQUALS = '!=';
@@ -80,6 +81,10 @@ class Flink_Database_Predicate {
         $this->attribute = $attribute;
     }
 
+    public function set_order(string $order) {
+        $this->order = $order;
+    }
+
     public function resolve() {
         switch ($this->operator) {
             case self::OPERATOR_EQUALS:
@@ -90,12 +95,14 @@ class Flink_Database_Predicate {
             case self::OPERATOR_GREATER_EQUALS:
             case self::OPERATOR_LESS:
             case self::OPERATOR_LESS_EQUALS:
-                return (($this->case_sensitive) ? 'BINARY ' : '') . $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
+                $result = (($this->case_sensitive) ? 'BINARY ' : '') . $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
             case self::OPERATOR_IS_NULL:
             case self::OPERATOR_IS_NOT_NULL:
-                return $this->attribute . " " . $this->operator;
+                $result = $this->attribute . " " . $this->operator;
             default: throw new Flink_Exception_NotImplemented('condition resolution not implemented for operator ' . $this->operator);
         }
+        if ($this->order !== null) $result .= " ORDER BY " . $this->order;
+        return $result;
     }
 
 }
