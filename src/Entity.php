@@ -10,11 +10,11 @@ abstract class Flink_Entity {
         return Flink_String::from(get_called_class())->append('List');
     }
 
-    public static function get_by(Flink_Database_Predicate $predicate): ?self {
-        return self::find_by($predicate)->get_single();
+    public static function get_by(Flink_Database_Predicate $predicate, ?string $order = ''): ?self {
+        return self::find_by($predicate, $order)->get_single();
     }
 
-    public static function find_by(Flink_Database_Predicate $predicate): Flink_EntityList {
+    public static function find_by(Flink_Database_Predicate $predicate, ?string $order = null): Flink_EntityList {
 
         $entity_class = get_called_class();
         $list_class = self::get_list_class();
@@ -22,7 +22,11 @@ abstract class Flink_Entity {
 
         global $connection;
 
-        $response = $connection->fetch("SELECT * FROM " . self::get_mapper_class()::get_table_name() . " WHERE " . $predicate->resolve() . ";");
+        $query = "SELECT * FROM " . self::get_mapper_class()::get_table_name() . " WHERE " . $predicate->resolve();
+        if ($order !== null) $query .= " ORDER BY " . $order;
+        $query .= ";";
+
+        $response = $connection->fetch($query);
 
         foreach ($response as $collation) {
             $entity = new $entity_class();
