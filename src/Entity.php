@@ -25,7 +25,6 @@ abstract class Flink_Entity {
         $query = "SELECT * FROM " . self::get_mapper_class()::get_table_name() . " WHERE " . $predicate->resolve();
         if ($order !== null) $query .= " ORDER BY " . $order;
         $query .= ";";
-
         $response = $connection->fetch($query);
 
         foreach ($response as $collation) {
