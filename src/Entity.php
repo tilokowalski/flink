@@ -49,6 +49,7 @@ abstract class Flink_Entity {
         foreach (get_object_vars($this) as $key => $value) {
             if ($value === null) continue;
             $result = $result->append($key . ', ');
+            $result = Flink_String::from($result);
         }
         return $result->substr(0, -2);
     }
