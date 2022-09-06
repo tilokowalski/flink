@@ -22,9 +22,7 @@ abstract class Flink_Entity {
 
         global $connection;
 
-        $query = "SELECT * FROM " . self::get_mapper_class()::get_table_name() . " WHERE " . $predicate->resolve() . ";";
-        $response = $connection->fetch($query);
-        echo $query . "<br /><br />";
+        $response = $connection->fetch("SELECT * FROM " . self::get_mapper_class()::get_table_name() . " WHERE " . $predicate->resolve() . ";");
 
         foreach ($response as $collation) {
             $entity = new $entity_class();

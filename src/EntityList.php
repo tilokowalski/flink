@@ -70,8 +70,8 @@ abstract class Flink_EntityList extends ArrayIterator {
     public function intersect(Flink_EntityList $other_list): Flink_EntityList {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
-        foreach ($this as $entity) {
-            if ($other_list->contains($entity)) {
+        foreach ($other_list as $entity) {
+            if ($this->contains($entity)) {
                 $result->add($entity);
             }
         }
@@ -123,7 +123,7 @@ abstract class Flink_EntityList extends ArrayIterator {
                 $predicate = Flink_Database_Predicate::equals($predicate);
             }
             $predicate->set_attribute($attribute);
-            if (count($parameters > 1)) {
+            if (count($parameters) > 1) {
                 $predicate->set_order($parameters[1]);
             }
             $result = $this->intersect(static::get_entity_class()::find_by($predicate));

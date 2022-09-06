@@ -24,13 +24,14 @@ class Flink_Database_Predicate {
     const OPERATOR_LESS = '<';
     const OPERATOR_LESS_EQUALS = '<=';
 
-    public function __construct(string $operator, ?string $compare = null, ?bool $case_sensitive = false) {
+    public function __construct(string $operator, ?string $compare = null, ?bool $case_sensitive = false, ?string $order = null) {
         $this->operator = $operator;
         if (null === $compare) {
             Flink_Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
         }
         $this->compare = $compare;
         $this->case_sensitive = $case_sensitive;
+        $this->order = $order;
     }
 
     public static function equals($compare) {
@@ -96,9 +97,11 @@ class Flink_Database_Predicate {
             case self::OPERATOR_LESS:
             case self::OPERATOR_LESS_EQUALS:
                 $result = (($this->case_sensitive) ? 'BINARY ' : '') . $this->attribute . " " . $this->operator . " '" . $this->compare . "'";
+                break;
             case self::OPERATOR_IS_NULL:
             case self::OPERATOR_IS_NOT_NULL:
                 $result = $this->attribute . " " . $this->operator;
+                break;
             default: throw new Flink_Exception_NotImplemented('condition resolution not implemented for operator ' . $this->operator);
         }
         if ($this->order !== null) $result .= " ORDER BY " . $this->order;
