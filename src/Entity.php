@@ -128,7 +128,8 @@ abstract class Flink_Entity {
 
     }
 
-    public function equals(Flink_Entity $other_entity): bool {
+    public function equals(?Flink_Entity $other_entity): bool {
+        if ($other_entity === null) return false;
         foreach (get_object_vars($this) as $attribute => $value) {
             if ($other_entity->$attribute !== $value) return false;
         }
