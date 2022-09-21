@@ -90,6 +90,7 @@ abstract class Flink_Entity {
     private function create() {
         global $connection;
         $connection->execute("INSERT INTO " . self::get_mapper_class()::get_table_name() . " (" . $this->get_stringified_attributes() . ") VALUES (" . $this->get_stringified_values() . ");");
+        $this->ID = $connection->insert_id;
     }
 
     private function update() {
