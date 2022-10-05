@@ -4,6 +4,7 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
 
     private $type;
     private $checked = false;
+    private $value;
 
     public static function text(string $name, ?string $title = null, ?bool $required = false): self {
         $result = new self($name, $title, $required);
@@ -38,6 +39,16 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
     public function get_type() {
         if (null === $this->type) $this->set_type('text');
         return $this->type;
+    }
+
+    public function set_value(?string $value = null) {
+        Flink_Assert::not_equals($this->get_type(), 'checkbox', 'input of type checkbox is to be handled with set_checked');
+        $this->value = $value;
+        return $this;
+    }
+
+    public function get_value() {
+        return $this->value;
     }
 
     public function set_checked(?bool $checked = true): self {
