@@ -9,7 +9,7 @@ class Flink_ViewComponent_FormElement_Textarea extends Flink_ViewComponent_FormE
         return $this;
     }
 
-    public function get_value() {
+    public function get_value_before_submission() {
         return $this->value;
     }
 

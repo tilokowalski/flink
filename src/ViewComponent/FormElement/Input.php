@@ -47,7 +47,7 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
         return $this;
     }
 
-    public function get_value() {
+    public function get_value_before_submission() {
         return $this->value;
     }
 
