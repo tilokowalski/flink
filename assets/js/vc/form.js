@@ -12,6 +12,10 @@ $('.flink-vc.form').each(function() {
         }
     });
 
+    form.find('button.cancel').click(function() {
+        window.location = window.location.href.split('?')[0];
+    });
+
     form.submit(function(e) {
 
         e.preventDefault();
