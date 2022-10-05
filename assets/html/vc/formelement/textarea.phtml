@@ -1,4 +1,4 @@
 
-<label for='<?= $this->get_name() ?>'><?= $this->get_title() ?><? if ($this->is_required()) echo ' *' ?></label>
+<label for='<?= $this->get_name() ?>'<? if ($this->is_required()) echo ' class=\'required\'' ?>><?= $this->get_title() ?><? if ($this->is_required()) echo ' *' ?></label>
 <? if (!$this->get_inline()): ?><br /><? endif ?>
 <textarea name='<?= $this->get_name() ?>' id='<?= $this->get_name() ?>'<? if ($this->is_required()) echo ' data-required=\'true\'' ?>><?= $this->get_value() ?></textarea>
