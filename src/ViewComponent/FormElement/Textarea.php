@@ -2,15 +2,15 @@
 
 class Flink_ViewComponent_FormElement_Textarea extends Flink_ViewComponent_FormElement {
 
-    private $value;
+    private $prefilled_value;
 
-    public function set_value(?string $value = null) {
-        $this->value = $value;
+    public function set_prefilled_value(?string $prefilled_value = null) {
+        $this->prefilled_value = $prefilled_value;
         return $this;
     }
 
-    public function get_value_before_submission() {
-        return $this->value;
+    public function get_prefilled_value() {
+        return $this->prefilled_value;
     }
 
 }
