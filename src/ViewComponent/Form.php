@@ -92,4 +92,10 @@ class Flink_ViewComponent_Form extends Flink_ViewComponent {
         return $this->cancel_title;
     }
 
+    public function get_class_list() {
+        $this->add_class("flink-vc");
+        $this->add_class("form");
+        return parent::get_class_list();
+    }
+
 }

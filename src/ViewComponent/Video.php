@@ -88,4 +88,11 @@ class Flink_ViewComponent_Video extends Flink_ViewComponent {
         return $this;
     }
 
+    public function get_class_list() {
+        $this->add_class("flink-vc");
+        $this->add_class("video");
+        $this->add_class("paused");
+        return parent::get_class_list();
+    }
+
 }

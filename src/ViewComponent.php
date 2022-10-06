@@ -3,6 +3,7 @@
 abstract class Flink_ViewComponent {
 
     private $name;
+    private $classes;
 
     public function __construct(string $name) {
         $this->name = $name;
@@ -34,6 +35,14 @@ abstract class Flink_ViewComponent {
 
     public function render() {
         include $this->get_component_file();
+    }
+
+    public function add_class(string $class) {
+        $this->classes[] = $class;
+    }
+
+    public function get_class_list() {
+        return implode(" ", $this->classes);
     }
 
 }

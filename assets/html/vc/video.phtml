@@ -1,4 +1,4 @@
-<div class='flink-vc video paused' data-volume-level='<?= $this->is_muted() ? 'muted' : 'high' ?>' data-pausable='<?= $this->is_pausable() ? 'true' : 'false' ?>' data-fullscreenable='<?= $this->is_pausable() ? 'true' : 'false' ?>' id='<?= $this->get_name() ?>'>
+<div class='<?= $this->get_class_list() ?>' data-volume-level='<?= $this->is_muted() ? 'muted' : 'high' ?>' data-pausable='<?= $this->is_pausable() ? 'true' : 'false' ?>' data-fullscreenable='<?= $this->is_pausable() ? 'true' : 'false' ?>' id='<?= $this->get_name() ?>'>
     <? if ($this->is_timelineable() || $this->is_controlable()): ?>
         <div class="gui">
             <? if ($this->is_timelineable()): ?>
