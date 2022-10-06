@@ -98,4 +98,10 @@ class Flink_ViewComponent_Form extends Flink_ViewComponent {
         return parent::get_class_list();
     }
 
+    public function set_inline(?bool $inline = true) {
+        foreach ($this->form_elements as $form_element) {
+            $form_element->set_inline($inline);
+        }
+    }
+
 }
