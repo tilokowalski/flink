@@ -31,6 +31,12 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
         return $result->set_type('checkbox');
     }
 
+    public static function hidden(string $name, string $value): self {
+        $result = new self($name, null, true);
+        $result->set_prefilled_value($value);
+        return $result->set_type('hidden');
+    }
+
     public function set_type(string $type): self {
         $this->type = $type;
         return $this;
