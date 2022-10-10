@@ -5,6 +5,7 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
     private $type;
     private $checked = false;
     private $prefilled_value;
+    private $disabled = false;
 
     public static function text(string $name, ?string $title = null, ?bool $required = false): self {
         $result = new self($name, $title, $required);
@@ -45,6 +46,15 @@ class Flink_ViewComponent_FormElement_Input extends Flink_ViewComponent_FormElem
     public function get_type() {
         if (null === $this->type) $this->set_type('text');
         return $this->type;
+    }
+
+    public function set_disabled(?bool $disabled = true) {
+        $this->disabled = $disabled;
+        return $this;
+    }
+
+    public function is_disabled() {
+        return $this->disabled;
     }
 
     public function set_prefilled_value(?string $prefilled_value = null) {
