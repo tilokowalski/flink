@@ -1,6 +1,6 @@
 {
     "name": "tilokowalski/flink",
-    "description": "Web Toolkit",
+    "description": "ORM Library",
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {
