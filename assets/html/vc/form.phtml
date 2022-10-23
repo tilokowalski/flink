@@ -1,7 +1,0 @@
-<form class='<?= $this->get_class_list() ?>' id='<?= $this->get_name() ?>' method='<?= $this->get_method() ?>'<? if (null !== $this->get_action()) echo " action='" . $this->get_action() . "'" ?>>
-    <? foreach ($this->get_form_elements() as $form_element): ?>
-        <div class='form-element'><? $form_element->render(); ?></div>
-    <? endforeach ?>
-    <? if ($this->is_submitable()): ?><button type='submit' class='button submit'><?= $this->get_submit_title() ?></button><? endif ?>
-    <? if ($this->is_cancelable()): ?><button type='button' class='button cancel'><?= $this->get_cancel_title() ?></button><? endif ?>
-</form>
