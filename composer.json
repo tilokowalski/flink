@@ -12,8 +12,5 @@
             "email": "privat@tilokowalski.de"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {
-        "tilokowalski/delight": "^1.0"
-    }
+    "minimum-stability": "stable"
 }
