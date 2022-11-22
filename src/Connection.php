@@ -42,5 +42,6 @@ class Flink_Connection extends mysqli {
         }
         fclose($handle);
     }
+    
 
 }
