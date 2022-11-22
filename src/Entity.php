@@ -3,11 +3,11 @@
 abstract class Flink_Entity {
 
     public static function get_mapper_class(): string {
-        return Flink_String::from(get_called_class())->append('Mapper');
+        return Delight_String::from(get_called_class())->append('Mapper');
     }
 
     public static function get_list_class(): string {
-        return Flink_String::from(get_called_class())->append('List');
+        return Delight_String::from(get_called_class())->append('List');
     }
 
     public static function get_by(Flink_Database_Predicate $predicate): ?self {
@@ -45,31 +45,31 @@ abstract class Flink_Entity {
     }
 
     private function get_stringified_attributes(): string {
-        $result = new Flink_String();
+        $result = new Delight_String();
         foreach (get_object_vars($this) as $key => $value) {
             if ($value === null) continue;
             $result = $result->append($key . ', ');
-            $result = Flink_String::from($result);
+            $result = Delight_String::from($result);
         }
         return $result->substr(0, -2);
     }
 
     private function get_stringified_values(): string {
-        $result = new Flink_String();
+        $result = new Delight_String();
         foreach (get_object_vars($this) as $value) {
             if ($value === null) continue;
             $result = $result->append('"' . Flink_Database_TypeConverter::stringify($value) . '", ');
-            $result = Flink_String::from($result);
+            $result = Delight_String::from($result);
         }
         return $result->substr(0, -2);
     }
 
     private function get_stringified_allocations(): string {
-        $result = new Flink_String();
+        $result = new Delight_String();
         foreach (get_object_vars($this) as $attribute => $value) {
             if ($value === null) continue;
             $result = $result->append($attribute . ' = "' . Flink_Database_TypeConverter::stringify($value) . '", ');
-            $result = Flink_String::from($result);
+            $result = Delight_String::from($result);
         }
         return $result->substr(0, -2);
     }
@@ -109,13 +109,13 @@ abstract class Flink_Entity {
             return self::$function($parameters);
         }
 
-        $function = Flink_String::from($function);
+        $function = Delight_String::from($function);
 
         if ($function->contains('find_by_')) $actual_function = 'find_by';
         if ($function->contains('get_by_')) $actual_function = 'get_by';
         $attribute = $function->replace($actual_function . '_', '');
 
-        if (isset($actual_function) && Flink_String::from($attribute)->length() > 0) {
+        if (isset($actual_function) && Delight_String::from($attribute)->length() > 0) {
             Flink_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Flink_Database_Predicate) {

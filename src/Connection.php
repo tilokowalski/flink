@@ -35,8 +35,8 @@ class Flink_Connection extends mysqli {
         $handle = fopen($file, "r");
         if (!$handle) throw new Flink_Exception_Database_InitiationFailed("initiation file '" . $file . "' could not be opened");
         while (($line = fgets($handle)) !== false) {
-            $content = Flink_String::from($line)->trim();
-            if (Flink_String::from($content)->length() > 0) {
+            $content = Delight_String::from($line)->trim();
+            if (Delight_String::from($content)->length() > 0) {
                 $this->execute($content);
             }
         }
