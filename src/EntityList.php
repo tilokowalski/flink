@@ -9,14 +9,14 @@ abstract class Flink_EntityList extends ArrayIterator {
     public function add(?Flink_Entity $entity): Flink_EntityList {
         if (null === $entity) return $this;
         $entity_class = self::get_entity_class();
-        Flink_Assert::instanceof($entity, $entity_class, 'failed asserting that entity is of type ' . $entity_class);
+        Delight_Assert::instanceof($entity, $entity_class, 'failed asserting that entity is of type ' . $entity_class);
         $this []= $entity;
         return $this;
     }
 
     public function get_single(): ?Flink_Entity {
         if (count($this) === 0) return null;
-        Flink_Assert::equals(count($this), 1, 'failed asserting that list holds only one entity');
+        Delight_Assert::equals(count($this), 1, 'failed asserting that list holds only one entity');
         return $this->get_first();
     }
 
@@ -92,7 +92,7 @@ abstract class Flink_EntityList extends ArrayIterator {
 
     public function sum(string $attribute) {
         if (count($this) === 0) return 0;
-        Flink_Assert::is_true(is_numeric($this->get_first()->$attribute), $attribute . ' can not be summed up');
+        Delight_Assert::is_true(is_numeric($this->get_first()->$attribute), $attribute . ' can not be summed up');
         $result = 0;
         foreach ($this as $entity) {
             $result += $entity->$attribute;
@@ -117,7 +117,7 @@ abstract class Flink_EntityList extends ArrayIterator {
         $attribute = $function->replace($actual_function . '_', '');
 
         if (isset($actual_function) && Delight_String::from($attribute)->length() > 0) {
-            Flink_Assert::greater_equals(count($parameters), 1, $actual_function . ' call must be provided with value or predicate');
+            Delight_Assert::greater_equals(count($parameters), 1, $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Flink_Database_Predicate) {
                 $predicate = Flink_Database_Predicate::equals($predicate);

@@ -27,7 +27,7 @@ class Flink_Database_Predicate {
     public function __construct(string $operator, ?string $compare = null, ?bool $case_sensitive = false, ?string $order = null) {
         $this->operator = $operator;
         if (null === $compare) {
-            Flink_Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
+            Delight_Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
         }
         $this->compare = $compare;
         $this->case_sensitive = $case_sensitive;

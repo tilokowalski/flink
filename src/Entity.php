@@ -116,7 +116,7 @@ abstract class Flink_Entity {
         $attribute = $function->replace($actual_function . '_', '');
 
         if (isset($actual_function) && Delight_String::from($attribute)->length() > 0) {
-            Flink_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
+            Delight_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Flink_Database_Predicate) {
                 $predicate = Flink_Database_Predicate::equals($predicate);

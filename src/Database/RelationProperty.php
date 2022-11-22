@@ -21,7 +21,7 @@ class Flink_Database_RelationProperty {
     }
 
     private function set_property_from_data(array $data, string $key) {
-        Flink_Assert::array_key_exists($key, $data, 'failed asserting that key \'' . $key . '\' is defined in relation property data');
+        Delight_Assert::array_key_exists($key, $data, 'failed asserting that key \'' . $key . '\' is defined in relation property data');
         $this->$key = $data[$key];
     }
 
