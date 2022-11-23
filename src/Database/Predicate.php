@@ -13,7 +13,7 @@ class Flink_Database_Predicate {
     const OPERATOR_NOT_EQUALS = '!=';
 
     const OPERATOR_LIKE = 'LIKE';
-    CONST OPERATOR_NOT_LIKE = 'NOT LIKE';
+    const OPERATOR_NOT_LIKE = 'NOT LIKE';
 
     const OPERATOR_IS_NULL = 'IS NULL';
     const OPERATOR_IS_NOT_NULL = 'IS NOT NULL';
