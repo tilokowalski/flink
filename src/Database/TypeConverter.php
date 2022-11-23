@@ -24,7 +24,7 @@ class Flink_Database_TypeConverter {
                 return $this->value;
             case static::TYPE_TINYINT: return (bool) $this->value;
             case static::TYPE_DATETIME: return new DateTime($this->value);
-            default: throw new Flink_Exception_NotImplemented('database type conversion not implemented for type ' . $this->type);
+            default: throw new Delight_Exception_NotImplemented('database type conversion not implemented for type ' . $this->type);
         }
     }
 
@@ -32,7 +32,7 @@ class Flink_Database_TypeConverter {
         if (is_int($value)) return strval($value);
         if (is_bool($value)) return boolval($value) ? '1' : '0';
         if (is_string($value)) return $value;
-        throw new Flink_Exception_NotImplemented('type converter has no implementation for conversion of ' . $value);
+        throw new Delight_Exception_NotImplemented('type converter has no implementation for conversion of ' . $value);
     }
 
 }

@@ -102,7 +102,7 @@ class Flink_Database_Predicate {
             case self::OPERATOR_IS_NOT_NULL:
                 $result = $this->attribute . " " . $this->operator;
                 break;
-            default: throw new Flink_Exception_NotImplemented('condition resolution not implemented for operator ' . $this->operator);
+            default: throw new Delight_Exception_NotImplemented('condition resolution not implemented for operator ' . $this->operator);
         }
         if ($this->order !== null) $result .= " ORDER BY " . $this->order;
         return $result;
