@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d8a74440c24d9af51a0796d8c7f1cd1",
-    "packages": [],
+    "content-hash": "6144221b462a4a5d085c90a78029fca1",
+    "packages": [
+        {
+            "name": "tilokowalski/delight",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kowalski2108/delight.git",
+                "reference": "4041c37572949f1f434aa5be1eb1a4b59b13bade"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kowalski2108/delight/zipball/4041c37572949f1f434aa5be1eb1a4b59b13bade",
+                "reference": "4041c37572949f1f434aa5be1eb1a4b59b13bade",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Tilo Kowalski",
+                    "email": "privat@tilokowalski.de"
+                }
+            ],
+            "description": "Web Toolkit",
+            "support": {
+                "issues": "https://github.com/kowalski2108/delight/issues",
+                "source": "https://github.com/kowalski2108/delight/tree/v1.0.1"
+            },
+            "time": "2022-11-23T09:18:40+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
