@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "tilokowalski/delight",
-            "version": "v1.2.2",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kowalski2108/delight.git",
-                "reference": "41a3c33d00f5eeca9e1e277ab09a10804986f131"
+                "reference": "393b9e91e508256f99027c1e7d34310b62fa8141"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kowalski2108/delight/zipball/41a3c33d00f5eeca9e1e277ab09a10804986f131",
-                "reference": "41a3c33d00f5eeca9e1e277ab09a10804986f131",
+                "url": "https://api.github.com/repos/kowalski2108/delight/zipball/393b9e91e508256f99027c1e7d34310b62fa8141",
+                "reference": "393b9e91e508256f99027c1e7d34310b62fa8141",
                 "shasum": ""
             },
             "type": "library",
@@ -39,9 +39,9 @@
             "description": "Web Toolkit",
             "support": {
                 "issues": "https://github.com/kowalski2108/delight/issues",
-                "source": "https://github.com/kowalski2108/delight/tree/v1.2.2"
+                "source": "https://github.com/kowalski2108/delight/tree/v1.2.4"
             },
-            "time": "2022-11-24T12:32:19+00:00"
+            "time": "2022-11-24T14:24:19+00:00"
         }
     ],
     "packages-dev": [],
