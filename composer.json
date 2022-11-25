@@ -14,6 +14,6 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "tilokowalski/delight": "^1.2"
+        "tilokowalski/delight": "^1.0"
     }
 }
