@@ -31,7 +31,11 @@ abstract class Flink_Entity {
                 // TODO type conversion takes way too long, probably due to query
                 // $type = $connection->fetch("DESCRIBE " . self::get_mapper_class()::get_table_name() . " " . $attribute)[0]['Type'];
                 // $entity->$attribute = (new Flink_Database_TypeConverter($type, $value))->convert();
-                $entity->$attribute = html_entity_decode($value);
+                if ($value == null) {
+                    $entity->$attribute = null;
+                } else {
+                    $entity->$attribute = html_entity_decode($value);
+                }
             }
             $result->add($entity);
         }
