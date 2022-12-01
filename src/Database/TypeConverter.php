@@ -32,6 +32,7 @@ class Flink_Database_TypeConverter {
         if (is_int($value)) return strval($value);
         if (is_bool($value)) return boolval($value) ? '1' : '0';
         if (is_string($value)) return htmlentities($value);
+        if ($value instanceof DateTime) return date_format($value, 'Y.m.d');
         throw new Delight_Exception_NotImplemented('type converter has no implementation for conversion of ' . $value);
     }
 
