@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1acfee6ffff00bd331506bc7c544d9e",
+    "content-hash": "6144221b462a4a5d085c90a78029fca1",
     "packages": [
         {
             "name": "tilokowalski/delight",
-            "version": "v1.1.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kowalski2108/delight.git",
@@ -39,7 +39,7 @@
             "description": "Web Toolkit",
             "support": {
                 "issues": "https://github.com/kowalski2108/delight/issues",
-                "source": "https://github.com/kowalski2108/delight/tree/v1.1.0"
+                "source": "https://github.com/kowalski2108/delight/tree/v1.0.0"
             },
             "time": "2022-12-01T16:09:27+00:00"
         }
