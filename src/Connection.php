@@ -11,16 +11,21 @@ class Flink_Connection extends mysqli {
 
     public function fetch(string $query) {
         $result = array();
-        $data = $this->query($query);
-        if (!$data) throw new Flink_Exception_Database_InvalidQuery($query);
-        while ($row = $data->fetch_assoc()) {
-            $result []= $row;
+        try {
+            $data = $this->query($query);
+            while ($row = $data->fetch_assoc()) {
+                $result []= $row;
+            }
+        } catch (Exception $e) {
+            throw new Flink_Exception_Database_InvalidQuery($query);
         }
         return $result;
     }
 
     public function execute(string $query) {
-        if (!$this->query($query)) {
+        try {
+            $this->query($query);
+        } catch (Exception $e) {
             throw new Flink_Exception_Database_InvalidQuery($query);
         }
     }
