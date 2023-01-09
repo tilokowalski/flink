@@ -1,6 +1,11 @@
 <?php
 
-class Flink_Database_RelationProperty {
+namespace Flink\Database;
+
+use Delight\Assert;
+use Flink\Entity;
+
+class RelationProperty {
 
     private $entity;
     private $key;
@@ -21,11 +26,11 @@ class Flink_Database_RelationProperty {
     }
 
     private function set_property_from_data(array $data, string $key) {
-        Delight_Assert::array_key_exists($key, $data, 'failed asserting that key \'' . $key . '\' is defined in relation property data');
+        Assert::array_key_exists($key, $data, 'failed asserting that key \'' . $key . '\' is defined in relation property data');
         $this->$key = $data[$key];
     }
 
-    public function get_content_for_entity(Flink_Entity $entity) {
+    public function get_content_for_entity(Entity $entity) {
         $entity_class = $this->entity;
         if ($this->multiple) {
             $function_name = 'find_by_' . $this->key;

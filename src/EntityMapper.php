@@ -1,6 +1,10 @@
 <?php
 
-abstract class Flink_EntityMapper {
+namespace Flink;
+
+use Flink\Database\RelationProperty;
+
+abstract class EntityMapper {
 
     private $relation_properties;
 
@@ -20,7 +24,7 @@ abstract class Flink_EntityMapper {
         return;
     }
 
-    public function add_relation_property(string $attribute, Flink_Database_RelationProperty $property) {
+    public function add_relation_property(string $attribute, RelationProperty $property) {
         $this->relation_properties[$attribute] = $property;
     }
 

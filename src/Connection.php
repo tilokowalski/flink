@@ -1,6 +1,11 @@
 <?php
 
-class Flink_Connection extends mysqli {
+namespace Flink;
+
+use Flink\Exception\Database\InitiationFailed;
+use Flink\Exception\Database\InvalidQuery;
+
+class Connection extends \mysqli {
 
     private $database;
 
@@ -17,7 +22,7 @@ class Flink_Connection extends mysqli {
                 $result []= $row;
             }
         } catch (Exception $e) {
-            throw new Flink_Exception_Database_InvalidQuery($query);
+            throw new InvalidQuery($query);
         }
         return $result;
     }
@@ -26,7 +31,7 @@ class Flink_Connection extends mysqli {
         try {
             $this->query($query);
         } catch (Exception $e) {
-            throw new Flink_Exception_Database_InvalidQuery($query);
+            throw new InvalidQuery($query);
         }
     }
 
@@ -38,10 +43,10 @@ class Flink_Connection extends mysqli {
 
     public function initialize_from(string $file) {
         $handle = fopen($file, "r");
-        if (!$handle) throw new Flink_Exception_Database_InitiationFailed("initiation file '" . $file . "' could not be opened");
+        if (!$handle) throw new InitiationFailed("initiation file '" . $file . "' could not be opened");
         while (($line = fgets($handle)) !== false) {
-            $content = Delight_String::from($line)->trim();
-            if (Delight_String::from($content)->length() > 0) {
+            $content = trim($line);
+            if (strlen($content) > 0) {
                 $this->execute($content);
             }
         }

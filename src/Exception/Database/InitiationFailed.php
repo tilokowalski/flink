@@ -1,6 +1,8 @@
 <?php
 
-class Flink_Exception_Database_InitiationFailed extends Flink_Exception_Database {
+namespace Flink\Exception\Database;
+
+class InitiationFailed extends \Flink\Exception\Database {
 
     public function __construct(?string $message = null) {
         if (null === $message) $message = 'database initiation failed';

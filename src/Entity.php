@@ -1,20 +1,28 @@
 <?php
 
-abstract class Flink_Entity {
+namespace Flink;
+
+use Delight\Assert;
+use Flink\Database\Predicate;
+use Flink\Database\TypeConverter;
+use Flink\Exception\Entity\UndefinedFunction;
+use Flink\Exception\Entity\UnmappedProperty;
+
+abstract class Entity {
 
     public static function get_mapper_class(): string {
-        return Delight_String::from(get_called_class())->append('Mapper');
+        return get_called_class() . 'Mapper';
     }
 
     public static function get_list_class(): string {
-        return Delight_String::from(get_called_class())->append('List');
+        return get_called_class() . 'List';
     }
 
-    public static function get_by(Flink_Database_Predicate $predicate): ?self {
+    public static function get_by(Predicate $predicate): ?self {
         return self::find_by($predicate)->get_single();
     }
 
-    public static function find_by(Flink_Database_Predicate $predicate): Flink_EntityList {
+    public static function find_by(Predicate $predicate): EntityList {
 
         $entity_class = get_called_class();
         $list_class = self::get_list_class();
@@ -30,7 +38,7 @@ abstract class Flink_Entity {
                 if ($attribute === 'ID') $entity_id = intval($value);
                 // TODO type conversion takes way too long, probably due to query
                 // $type = $connection->fetch("DESCRIBE " . self::get_mapper_class()::get_table_name() . " " . $attribute)[0]['Type'];
-                // $entity->$attribute = (new Flink_Database_TypeConverter($type, $value))->convert();
+                // $entity->$attribute = (new TypeConverter($type, $value))->convert();
                 if ($value == null) {
                     $entity->$attribute = null;
                 } else {
@@ -45,37 +53,34 @@ abstract class Flink_Entity {
     }
 
     public static function get_all() {
-        return self::find_by_ID(Flink_Database_Predicate::not_null());
+        return self::find_by_ID(Predicate::not_null());
     }
 
     private function get_stringified_attributes(): string {
-        $result = new Delight_String();
+        $result = "";
         foreach (get_object_vars($this) as $key => $value) {
             if ($value === null) continue;
-            $result = $result->append($key . ', ');
-            $result = Delight_String::from($result);
+            $result .= $key . ', ';
         }
-        return $result->substr(0, -2);
+        return substr($result, 0, -2);
     }
 
     private function get_stringified_values(): string {
-        $result = new Delight_String();
+        $result = "";
         foreach (get_object_vars($this) as $value) {
             if ($value === null) continue;
-            $result = $result->append('"' . Flink_Database_TypeConverter::stringify($value) . '", ');
-            $result = Delight_String::from($result);
+            $result .= '"' . TypeConverter::stringify($value) . '", ';
         }
-        return $result->substr(0, -2);
+        return substr($result, 0, -2);
     }
 
     private function get_stringified_allocations(): string {
-        $result = new Delight_String();
+        $result = "";
         foreach (get_object_vars($this) as $attribute => $value) {
             if ($value === null) continue;
-            $result = $result->append($attribute . ' = "' . Flink_Database_TypeConverter::stringify($value) . '", ');
-            $result = Delight_String::from($result);
+            $result .= $attribute . ' = "' . TypeConverter::stringify($value) . '", ';
         }
-        return $result->substr(0, -2);
+        return substr($result, 0, -2);
     }
     
     public function save() {
@@ -113,27 +118,25 @@ abstract class Flink_Entity {
             return self::$function($parameters);
         }
 
-        $function = Delight_String::from($function);
+        if (str_contains($function, 'find_by_')) $actual_function = 'find_by';
+        if (str_contains($function, 'get_by_')) $actual_function = 'get_by_';
+        $attribute = str_replace($actual_function . '_', '', $function);
 
-        if ($function->contains('find_by_')) $actual_function = 'find_by';
-        if ($function->contains('get_by_')) $actual_function = 'get_by';
-        $attribute = $function->replace($actual_function . '_', '');
-
-        if (isset($actual_function) && Delight_String::from($attribute)->length() > 0) {
-            Delight_Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
+        if (isset($actual_function) && strlen($attribute) > 0) {
+            Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
-            if (!$predicate instanceof Flink_Database_Predicate) {
-                $predicate = Flink_Database_Predicate::equals($predicate);
+            if (!$predicate instanceof Predicate) {
+                $predicate = Predicate::equals($predicate);
             }
             $predicate->set_attribute($attribute);
             return self::$actual_function($predicate);
         }
 
-        throw new Flink_Exception_Entity_UndefinedFunction(get_called_class() . '::' . $function . '() is not defined  ');
+        throw new UndefinedFunction(get_called_class() . '::' . $function . '() is not defined  ');
 
     }
 
-    public function equals(?Flink_Entity $other_entity): bool {
+    public function equals(?self $other_entity): bool {
         if ($other_entity === null) return false;
         foreach (get_object_vars($this) as $attribute => $value) {
             if ($other_entity->$attribute !== $value) return false;
@@ -141,7 +144,7 @@ abstract class Flink_Entity {
         return true;
     }
 
-    public function to_list(): Flink_EntityList {
+    public function to_list(): EntityList {
         $list_class = self::get_list_class();
         $result = new $list_class();
         $result->add($this);
@@ -161,7 +164,7 @@ abstract class Flink_Entity {
             return $relation_property->get_content_for_entity($this);
         }
 
-        throw new Flink_Exception_Entity_UnmappedProperty(get_called_class(), $attribute);
+        throw new UnmappedProperty(get_called_class(), $attribute);
 
     }
 

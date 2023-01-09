@@ -1,6 +1,8 @@
 <?php
 
-class Flink_Exception_Entity extends Flink_Exception {
+namespace Flink\Exception;
+
+class Entity extends \Flink\Exception {
 
     public function __construct(?string $message = null) {
         if (null === $message) $message = 'failed to handle entity';

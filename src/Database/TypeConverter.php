@@ -1,6 +1,9 @@
 <?php
 
-class Flink_Database_TypeConverter {
+namespace Flink\Database;
+use Delight\Exception\NotImplemented;
+
+class TypeConverter {
 
     private $type;
     private $value;
@@ -23,8 +26,8 @@ class Flink_Database_TypeConverter {
             case static::TYPE_VARCHAR:
                 return $this->value;
             case static::TYPE_TINYINT: return (bool) $this->value;
-            case static::TYPE_DATETIME: return new DateTime($this->value);
-            default: throw new Delight_Exception_NotImplemented('database type conversion not implemented for type ' . $this->type);
+            case static::TYPE_DATETIME: return new \DateTime($this->value);
+            default: throw new NotImplemented('database type conversion not implemented for type ' . $this->type);
         }
     }
 
@@ -32,8 +35,8 @@ class Flink_Database_TypeConverter {
         if (is_int($value)) return strval($value);
         if (is_bool($value)) return boolval($value) ? '1' : '0';
         if (is_string($value)) return htmlentities($value);
-        if ($value instanceof DateTime) return date_format($value, 'Y.m.d H:i:s');
-        throw new Delight_Exception_NotImplemented('type converter has no implementation for conversion of ' . $value);
+        if ($value instanceof \DateTime) return date_format($value, 'Y.m.d H:i:s');
+        throw new NotImplemented('type converter has no implementation for conversion of ' . $value);
     }
 
 }

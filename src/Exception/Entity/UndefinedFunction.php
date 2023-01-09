@@ -1,6 +1,8 @@
 <?php
 
-class Flink_Exception_Entity_UndefinedFunction extends Flink_Exception_Entity {
+namespace Flink\Exception\Entity;
+
+class UndefinedFunction extends \Flink\Exception\Entity {
 
     public function __construct(?string $message = null) {
         if (null === $message) $message = 'called function is not defined';

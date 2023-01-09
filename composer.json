@@ -4,7 +4,9 @@
     "type": "library",
     "license": "Apache-2.0",
     "autoload": {
-        "classmap": ["src/"]
+        "psr-4": {
+            "Flink\\": "src/"
+        }
     },
     "authors": [
         {
@@ -14,6 +16,6 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "tilokowalski/delight": "^1.0"
+        "tilokowalski/delight": "^1.3"
     }
 }

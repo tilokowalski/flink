@@ -1,6 +1,11 @@
 <?php
 
-class Flink_Database_Predicate {
+namespace Flink\Database;
+
+use Delight\Assert;
+use Delight\Exception\NotImplemented;
+
+class Predicate {
 
     private $case_sensitive;
 
@@ -27,7 +32,7 @@ class Flink_Database_Predicate {
     public function __construct(string $operator, ?string $compare = null, ?bool $case_sensitive = false, ?string $order = null) {
         $this->operator = $operator;
         if (null === $compare) {
-            Delight_Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
+            Assert::in_array($operator, array(self::OPERATOR_IS_NULL, self::OPERATOR_IS_NOT_NULL), 'compare value may not be null for operator \'' . $operator . '\'');
         }
         $this->compare = $compare;
         $this->case_sensitive = $case_sensitive;
@@ -102,7 +107,7 @@ class Flink_Database_Predicate {
             case self::OPERATOR_IS_NOT_NULL:
                 $result = $this->attribute . " " . $this->operator;
                 break;
-            default: throw new Delight_Exception_NotImplemented('condition resolution not implemented for operator ' . $this->operator);
+            default: throw new NotImplemented('condition resolution not implemented for operator ' . $this->operator);
         }
         if ($this->order !== null) $result .= " ORDER BY " . $this->order;
         return $result;

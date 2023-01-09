@@ -1,5 +1,7 @@
 <?php
 
-abstract class Flink_Exception extends Exception {
+namespace Flink;
+
+abstract class Exception extends \Delight\Exception {
     
 }
