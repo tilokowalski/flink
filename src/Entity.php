@@ -119,7 +119,7 @@ abstract class Entity {
         }
 
         if (str_contains($function, 'find_by_')) $actual_function = 'find_by';
-        if (str_contains($function, 'get_by_')) $actual_function = 'get_by_';
+        if (str_contains($function, 'get_by_')) $actual_function = 'get_by';
         $attribute = str_replace($actual_function . '_', '', $function);
 
         if (isset($actual_function) && strlen($attribute) > 0) {
