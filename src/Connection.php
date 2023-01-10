@@ -21,7 +21,7 @@ class Connection extends \mysqli {
             while ($row = $data->fetch_assoc()) {
                 $result []= $row;
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new InvalidQuery($query);
         }
         return $result;
@@ -30,27 +30,26 @@ class Connection extends \mysqli {
     public function execute(string $query) {
         try {
             $this->query($query);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new InvalidQuery($query);
         }
     }
 
-    public function is_first_run() {
+    public function execute_file(string $file) {
+        $sql = file_get_contents($file);
+        if (!$sql) throw new InitiationFailed("file '" . $file . "' could not be opened");
+
+        try {
+            $this->multi_query($sql);
+        } catch (\Exception $e) {
+            throw new InvalidQuery($sql);
+        }
+    }
+
+    public function is_database_empty() {
         $data = $this->fetch("SELECT COUNT(*) as table_count FROM information_schema.tables WHERE table_schema = '" . $this->database . "';");
         $table_count = intval($data[0]['table_count']);
         return !$table_count > 0;
-    }
-
-    public function initialize_from(string $file) {
-        $handle = fopen($file, "r");
-        if (!$handle) throw new InitiationFailed("initiation file '" . $file . "' could not be opened");
-        while (($line = fgets($handle)) !== false) {
-            $content = trim($line);
-            if (strlen($content) > 0) {
-                $this->execute($content);
-            }
-        }
-        fclose($handle);
     }
 
 }
