@@ -22,7 +22,7 @@ class Connection extends \mysqli {
                 $result []= $row;
             }
         } catch (mysqli_sql_exception $e) {
-            throw new QueryException($query, $e);
+            throw new QueryException($e, $query);
         }
         return $result;
     }
@@ -31,7 +31,7 @@ class Connection extends \mysqli {
         try {
             $this->query($query);
         } catch (mysqli_sql_exception $e) {
-            throw new QueryException($query, $e);
+            throw new QueryException($e, $query);
         }
     }
 
