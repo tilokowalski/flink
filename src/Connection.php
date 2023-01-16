@@ -40,8 +40,8 @@ class Connection extends \mysqli {
 
         try {
             $this->multi_query($sql);
-        } catch (\Exception $e) {
-            throw new InvalidQuery($sql);
+        } catch (mysqli_sql_exception $e) {
+            throw new QueryException($e, $sql);
         }
     }
 
