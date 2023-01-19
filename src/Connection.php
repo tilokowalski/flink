@@ -2,8 +2,8 @@
 
 namespace Flink;
 
-use Flink\Exception\Database\InitiationFailed;
-use Flink\Exception\Database\InvalidQuery;
+use Flink\Exception\Database\QueryException;
+use mysqli_sql_exception;
 
 class Connection extends \mysqli {
 
@@ -21,8 +21,8 @@ class Connection extends \mysqli {
             while ($row = $data->fetch_assoc()) {
                 $result []= $row;
             }
-        } catch (\Exception $e) {
-            throw new InvalidQuery($query);
+        } catch (mysqli_sql_exception $e) {
+            throw new QueryException($e, $query);
         }
         return $result;
     }
@@ -30,19 +30,18 @@ class Connection extends \mysqli {
     public function execute(string $query) {
         try {
             $this->query($query);
-        } catch (\Exception $e) {
-            throw new InvalidQuery($query);
+        } catch (mysqli_sql_exception $e) {
+            throw new QueryException($e, $query);
         }
     }
 
     public function execute_file(string $file) {
         $sql = file_get_contents($file);
-        if (!$sql) throw new InitiationFailed("file '" . $file . "' could not be opened");
 
         try {
             $this->multi_query($sql);
-        } catch (\Exception $e) {
-            throw new InvalidQuery($sql);
+        } catch (mysqli_sql_exception $e) {
+            throw new QueryException($e, $sql);
         }
     }
 
