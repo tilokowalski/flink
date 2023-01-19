@@ -152,6 +152,7 @@ abstract class Entity {
     }
 
     public function __get($attribute) {
+        global $connection;
 
         if (property_exists($this, $attribute)) {
             return $this->$attribute;
@@ -162,6 +163,12 @@ abstract class Entity {
         if (array_key_exists($attribute, $relation_properties)) {
             $relation_property = $relation_properties[$attribute];
             return $relation_property->get_content_for_entity($this);
+        }
+
+        $result = $connection->fetch("SHOW COLUMNS FROM " . self::get_mapper_class()::get_table_name() . " LIKE '" . $attribute . "';");
+        if (count($result) === 1) {
+            $this->$attribute = null;
+            return;
         }
 
         throw new UnmappedProperty(get_called_class(), $attribute);
