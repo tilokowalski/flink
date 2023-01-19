@@ -165,6 +165,7 @@ abstract class Entity {
             return $relation_property->get_content_for_entity($this);
         }
 
+        // TODO Performantere Lösung für bisher nicht gesetzte Felder, die aber richtig sind
         $result = $connection->fetch("SHOW COLUMNS FROM " . self::get_mapper_class()::get_table_name() . " LIKE '" . $attribute . "';");
         if (count($result) === 1) {
             $this->$attribute = null;
