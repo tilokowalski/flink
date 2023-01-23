@@ -4,7 +4,6 @@ namespace Flink;
 
 use Delight\Assert;
 use Flink\Database\Predicate;
-use Flink\Database\TypeConverter;
 use Flink\Exception\Entity\UndefinedFunction;
 use Flink\Exception\Entity\UnmappedProperty;
 
@@ -35,15 +34,9 @@ abstract class Entity {
         foreach ($response as $collation) {
             $entity = new $entity_class();
             foreach ($collation as $attribute => $value) {
-                if ($attribute === 'ID') $entity_id = intval($value);
-                // TODO type conversion takes way too long, probably due to query
-                // $type = $connection->fetch("DESCRIBE " . self::get_mapper_class()::get_table_name() . " " . $attribute)[0]['Type'];
-                // $entity->$attribute = (new TypeConverter($type, $value))->convert();
-                if ($value == null) {
-                    $entity->$attribute = null;
-                } else {
-                    $entity->$attribute = html_entity_decode($value);
-                }
+                if ($value != null) $value = html_entity_decode($value);
+                if ($attribute === 'ID') $value = intval($value);
+                $entity->$attribute = $value;
             }
             $result->add($entity);
         }
@@ -54,6 +47,14 @@ abstract class Entity {
 
     public static function get_all() {
         return self::find_by_ID(Predicate::not_null());
+    }
+
+    public static function stringify($value) {
+        global $connection;
+        if (is_int($value)) $value = strval($value);
+        if (is_bool($value)) $value = boolval($value) ? '1' : '0';
+        if ($value instanceof \DateTime) $value = date_format($value, 'Y.m.d H:i:s');
+        return $connection->real_escape_string(htmlentities($value));
     }
 
     private function get_stringified_attributes(): string {
@@ -69,7 +70,7 @@ abstract class Entity {
         $result = "";
         foreach (get_object_vars($this) as $value) {
             if ($value === null) continue;
-            $result .= '"' . TypeConverter::stringify($value) . '", ';
+            $result .= '"' . self::stringify($value) . '", ';
         }
         return substr($result, 0, -2);
     }
@@ -78,7 +79,7 @@ abstract class Entity {
         $result = "";
         foreach (get_object_vars($this) as $attribute => $value) {
             if ($value === null) continue;
-            $result .= $attribute . ' = "' . TypeConverter::stringify($value) . '", ';
+            $result .= $attribute . ' = "' . self::stringify($value) . '", ';
         }
         return substr($result, 0, -2);
     }
