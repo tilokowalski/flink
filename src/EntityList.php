@@ -13,6 +13,10 @@ abstract class EntityList extends \ArrayIterator {
         return str_replace('List', '', get_called_class());
     }
 
+    public function to_array(): array {
+        return iterator_to_array($this);
+    }
+
     public function add(?Entity $entity): self {
         if (null === $entity) return $this;
         $entity_class = self::get_entity_class();
