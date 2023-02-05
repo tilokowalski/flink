@@ -61,7 +61,6 @@ abstract class Entity {
     private function get_stringified_attributes(): string {
         $result = "";
         foreach (get_object_vars($this) as $key => $value) {
-            if ($value === null) continue;
             $result .= $key . ', ';
         }
         return substr($result, 0, -2);
@@ -70,8 +69,11 @@ abstract class Entity {
     private function get_stringified_values(): string {
         $result = "";
         foreach (get_object_vars($this) as $value) {
-            if ($value === null) continue;
-            $result .= '"' . self::stringify($value) . '", ';
+            if ($value === null) {
+                $result .= 'NULL, ';
+            } else {
+                $result .= '"' . self::stringify($value) . '", ';
+            }
         }
         return substr($result, 0, -2);
     }
@@ -79,8 +81,11 @@ abstract class Entity {
     private function get_stringified_allocations(): string {
         $result = "";
         foreach (get_object_vars($this) as $attribute => $value) {
-            if ($value === null) continue;
-            $result .= $attribute . ' = "' . self::stringify($value) . '", ';
+            if ($value === null) {
+                $result .= $attribute . ' = NULL, ';
+            } else {
+                $result .= $attribute . ' = "' . self::stringify($value) . '", ';
+            }
         }
         return substr($result, 0, -2);
     }
