@@ -33,12 +33,12 @@ abstract class EntityList extends \ArrayIterator {
 
     public function get_first(): ?Entity {
         if (count($this) === 0) return null;
-        return $this[0];
+        return $this[array_key_first(iterator_to_array($this))];
     }
 
     public function get_last(): ?Entity {
         if (count($this) === 0) return null;
-        return end($this);
+        return $this[array_key_last(iterator_to_array($this))];
     }
 
     public function limit(int $limit) {
