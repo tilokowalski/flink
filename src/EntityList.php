@@ -36,6 +36,11 @@ abstract class EntityList extends \ArrayIterator {
         return $this[0];
     }
 
+    public function get_last(): ?Entity {
+        if (count($this) === 0) return null;
+        return end($this);
+    }
+
     public function limit(int $limit) {
         $list_class = self::get_entity_class()::get_list_class();
         $result = new $list_class();
