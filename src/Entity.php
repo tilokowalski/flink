@@ -7,7 +7,7 @@ use Flink\Database\Predicate;
 use Flink\Exception\Entity\UndefinedFunction;
 use Flink\Exception\Entity\UnmappedProperty;
 
-#[AllowDynamicProperties]
+#[\AllowDynamicProperties]
 abstract class Entity {
 
     public static function get_mapper_class(): string {
