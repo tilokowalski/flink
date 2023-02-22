@@ -18,8 +18,8 @@ abstract class Entity {
         return get_called_class() . 'List';
     }
 
-    public static function get_by(Predicate $predicate): ?self {
-        return self::find_by($predicate)->get_single();
+    public static function get_by(Predicate $predicate, ?bool $allow_html_columns = false): ?self {
+        return self::find_by($predicate, $allow_html_columns)->get_single();
     }
 
     public static function find_by(Predicate $predicate, ?bool $allow_html_columns = false): EntityList {
@@ -133,13 +133,14 @@ abstract class Entity {
         $attribute = str_replace($actual_function . '_', '', $function);
 
         if (isset($actual_function) && strlen($attribute) > 0) {
-            Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
+            Assert::greater_equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Predicate) {
                 $predicate = Predicate::equals($predicate);
             }
             $predicate->set_attribute($attribute);
-            return self::$actual_function($predicate);
+            $allow_html = isset($parameters[1]) ? $parameters[1] : false;
+            return self::$actual_function($predicate, $allow_html);
         }
 
         throw new UndefinedFunction(get_called_class() . '::' . $function . '() is not defined  ');
