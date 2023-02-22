@@ -7,7 +7,7 @@ use Flink\Database\Predicate;
 use Flink\Exception\Entity\UndefinedFunction;
 use Flink\Exception\Entity\UnmappedProperty;
 
-#[AllowDynamicProperties]
+#[\AllowDynamicProperties]
 abstract class Entity {
 
     public static function get_mapper_class(): string {
@@ -22,7 +22,7 @@ abstract class Entity {
         return self::find_by($predicate)->get_single();
     }
 
-    public static function find_by(Predicate $predicate): EntityList {
+    public static function find_by(Predicate $predicate, ?bool $allow_html_columns = false): EntityList {
 
         $entity_class = get_called_class();
         $list_class = self::get_list_class();
@@ -35,7 +35,10 @@ abstract class Entity {
         foreach ($response as $collation) {
             $entity = new $entity_class();
             foreach ($collation as $attribute => $value) {
-                if ($value != null) $value = html_entity_decode($value);
+                if ($value != null) {
+                    if ($allow_html_columns) $value = html_entity_decode($value);
+                    else $value = htmlentities($value);
+                }
                 if ($attribute === 'ID') $value = intval($value);
                 $entity->$attribute = $value;
             }
