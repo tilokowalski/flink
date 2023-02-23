@@ -35,7 +35,7 @@ abstract class Entity {
         foreach ($response as $collation) {
             $entity = new $entity_class();
             foreach ($collation as $attribute => $value) {
-                if ($value != null) $value = htmlentities($value);
+                if ($value != null) $value = html_entity_decode($value);
                 if ($attribute === 'ID') $value = intval($value);
                 $entity->$attribute = $value;
             }
