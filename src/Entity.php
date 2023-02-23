@@ -18,11 +18,11 @@ abstract class Entity {
         return get_called_class() . 'List';
     }
 
-    public static function get_by(Predicate $predicate, ?bool $allow_html_columns = false): ?self {
-        return self::find_by($predicate, $allow_html_columns)->get_single();
+    public static function get_by(Predicate $predicate): ?self {
+        return self::find_by($predicate)->get_single();
     }
 
-    public static function find_by(Predicate $predicate, ?bool $allow_html_columns = false): EntityList {
+    public static function find_by(Predicate $predicate): EntityList {
 
         $entity_class = get_called_class();
         $list_class = self::get_list_class();
@@ -35,10 +35,7 @@ abstract class Entity {
         foreach ($response as $collation) {
             $entity = new $entity_class();
             foreach ($collation as $attribute => $value) {
-                if ($value != null) {
-                    if ($allow_html_columns) $value = html_entity_decode($value);
-                    else $value = htmlentities($value);
-                }
+                if ($value != null) $value = htmlentities($value);
                 if ($attribute === 'ID') $value = intval($value);
                 $entity->$attribute = $value;
             }
@@ -139,8 +136,7 @@ abstract class Entity {
                 $predicate = Predicate::equals($predicate);
             }
             $predicate->set_attribute($attribute);
-            $allow_html = isset($parameters[1]) ? $parameters[1] : false;
-            return self::$actual_function($predicate, $allow_html);
+            return self::$actual_function($predicate);
         }
 
         throw new UndefinedFunction(get_called_class() . '::' . $function . '() is not defined  ');
