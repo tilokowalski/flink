@@ -87,6 +87,10 @@ class Predicate {
         $this->attribute = $attribute;
     }
 
+    public function get_attribute(): string {
+        return $this->attribute;
+    }
+
     public function set_order(string $order) {
         $this->order = $order;
     }
