@@ -130,7 +130,7 @@ abstract class Entity {
         $attribute = str_replace($actual_function . '_', '', $function);
 
         if (isset($actual_function) && strlen($attribute) > 0) {
-            Assert::greater_equals(count($parameters), 1, $actual_function . ' call must be provided with value or predicate');
+            Assert::equals(1, count($parameters), $actual_function . ' call must be provided with value or predicate');
             $predicate = $parameters[0];
             if (!$predicate instanceof Predicate) {
                 $predicate = Predicate::equals($predicate);
