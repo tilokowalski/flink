@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2602a63075f82d11c1dbcb62a89c4695",
+    "content-hash": "560e422185ed18dc7897bb083cae3c87",
     "packages": [
         {
             "name": "tilokowalski/delight",
-            "version": "1.3.5",
+            "version": "1.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kowalski2108/delight.git",
-                "reference": "8045263dfb9531f2a7deb6b50b241f25ad94eee0"
+                "reference": "36b3fa33f8d8a25030c7624cc0417f1a6d333370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kowalski2108/delight/zipball/8045263dfb9531f2a7deb6b50b241f25ad94eee0",
-                "reference": "8045263dfb9531f2a7deb6b50b241f25ad94eee0",
+                "url": "https://api.github.com/repos/kowalski2108/delight/zipball/36b3fa33f8d8a25030c7624cc0417f1a6d333370",
+                "reference": "36b3fa33f8d8a25030c7624cc0417f1a6d333370",
                 "shasum": ""
             },
             "type": "library",
@@ -39,9 +39,9 @@
             "description": "Web Toolkit",
             "support": {
                 "issues": "https://github.com/kowalski2108/delight/issues",
-                "source": "https://github.com/kowalski2108/delight/tree/1.3.5"
+                "source": "https://github.com/kowalski2108/delight/tree/1.5.13"
             },
-            "time": "2023-01-09T21:08:31+00:00"
+            "time": "2023-02-24T07:32:32+00:00"
         }
     ],
     "packages-dev": [],
