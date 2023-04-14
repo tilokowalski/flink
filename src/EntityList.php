@@ -108,7 +108,7 @@ abstract class EntityList extends \ArrayIterator {
 
     public function sum(string $attribute) {
         if (count($this) === 0) return 0;
-        Assert::is_true(is_numeric($this->get_first()->$attribute) || $this->get_first()->attribute === null, $attribute . ' can not be summed up');
+        Assert::is_true(is_numeric($this->get_first()->$attribute) || $this->get_first()->$attribute === null, $attribute . ' can not be summed up');
         $result = 0;
         foreach ($this as $entity) {
             if ($entity->$attribute === null) continue;
