@@ -8,4 +8,5 @@ class Database extends \Flink\Exception {
         if (null === $message) $message = 'failed to handle database';
         parent::__construct($message);
     }
+    
 }

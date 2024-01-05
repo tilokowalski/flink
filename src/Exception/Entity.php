@@ -8,4 +8,5 @@ class Entity extends \Flink\Exception {
         if (null === $message) $message = 'failed to handle entity';
         parent::__construct($message);
     }
+    
 }

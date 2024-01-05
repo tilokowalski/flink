@@ -1,8 +1,8 @@
 {
     "name": "tilokowalski/flink",
     "description": "ORM Library",
-    "type": "library",
     "license": "Apache-2.0",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "Flink\\": "src/"
@@ -11,11 +11,11 @@
     "authors": [
         {
             "name": "Tilo Kowalski",
-            "email": "privat@tilokowalski.de"
+            "email": "dev@tilokowalski.de"
         }
     ],
     "minimum-stability": "stable",
     "require": {
-        "tilokowalski/delight": "^1.5"
+        "tilokowalski/delight": "^1.0"
     }
 }

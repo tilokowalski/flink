@@ -8,4 +8,5 @@ class UnmappedProperty extends \Flink\Exception\Entity {
         $message = $class . '->' . $attribute . ' is neither a property nor a mapped relation';
         parent::__construct($message);
     }
+    
 }
